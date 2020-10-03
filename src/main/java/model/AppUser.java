@@ -1,0 +1,161 @@
+package model;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
+@Table(name = "app_user")
+public class AppUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String login;
+    private String name;
+    private String lastName;
+    private String password;
+    private String email;
+    @CreationTimestamp
+    private Date registeredSince;
+    @ManyToMany(mappedBy = "following", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    private Set<AppUser> followers = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name = "follower_followed",
+    joinColumns = {@JoinColumn(name = "follower_fk")},
+    inverseJoinColumns = {@JoinColumn(name = "followed_fk")})
+    private Set<AppUser> following = new HashSet<>();
+
+
+    public AppUser() {
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<AppUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<AppUser> following) {
+        this.following = following;
+    }
+
+    public Set<AppUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<AppUser> followedBy) {
+        this.followers = followedBy;
+    }
+
+    public Date getRegisteredSince() {
+        return registeredSince;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRegisteredSince(Date registeredSince) {
+        this.registeredSince = registeredSince;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppUser appUser = (AppUser) o;
+        return id.equals(appUser.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", registeredSince=" + registeredSince +
+                ", followers=" + followers +
+                ", following=" + following +
+                '}';
+    }
+
+    public AppUser build() {
+        AppUser user = new AppUser();
+        user.setLogin(this.login);
+        user.setPassword(this.password);
+        user.setName(this.name);
+        user.setLastName(this.lastName);
+        user.setEmail(this.email);
+        user.setRegisteredSince(this.registeredSince);
+        return user;
+    }
+}
+
+
+//AppUser:
+//        id: Long
+//        login: String
+//        name: String
+//        lastName: String
+//        email: String
+//        following: Set
+//        followedBy: Set
+//        registeredSince: Date
