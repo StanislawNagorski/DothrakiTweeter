@@ -22,6 +22,7 @@ public class AppUser {
     private String email;
     @CreationTimestamp
     private Date registeredSince;
+
     @ManyToMany(mappedBy = "following", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Set<AppUser> followers = new HashSet<>();
 
@@ -32,10 +33,7 @@ public class AppUser {
     private Set<AppUser> following = new HashSet<>();
 
 
-    public AppUser() {
-    }
-
-
+    public AppUser() {}
 
     public Long getId() {
         return id;
@@ -137,15 +135,44 @@ public class AppUser {
                 '}';
     }
 
-    public AppUser build() {
-        AppUser user = new AppUser();
-        user.setLogin(this.login);
-        user.setPassword(this.password);
-        user.setName(this.name);
-        user.setLastName(this.lastName);
-        user.setEmail(this.email);
-        user.setRegisteredSince(this.registeredSince);
-        return user;
+    public static class UserBuilder {
+        private String name;
+        private String lastName;
+        private String login;
+        private String password;
+        private String email;
+        public static UserBuilder getBuilder() {
+            return new UserBuilder();
+        }
+        public UserBuilder login(String login) {
+            this.login = login;
+            return this;
+        }
+        public UserBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+        public UserBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+        public UserBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+        public AppUser build() {
+            AppUser user = new AppUser();
+            user.setLogin(this.login);
+            user.setPassword(this.password);
+            user.setName(this.name);
+            user.setLastName(this.lastName);
+            user.setEmail(this.email);
+            return user;
+        }
     }
 }
 

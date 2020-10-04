@@ -37,7 +37,11 @@ public class HibarnateUtil {
         em.getTransaction().commit();
     }
 
-    
+    public EntityManager getEm() {
+        return em;
+    }
+
+
 
 }
 
