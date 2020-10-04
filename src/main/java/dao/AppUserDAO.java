@@ -26,6 +26,6 @@ public interface AppUserDAO {
 
     void saveUser(AppUser user);
 
-    void removeUser(Long id);
+    void deleteUser(AppUser user);
 
 }

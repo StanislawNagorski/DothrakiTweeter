@@ -1,27 +1,27 @@
-package hibarnate;
+package hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class HibarnateUtil {
+public class HibernateUtil {
 
-    private static HibarnateUtil instance;
+    private static HibernateUtil instance;
     private final EntityManagerFactory factory = Persistence.createEntityManagerFactory("myDatabase");
     private final EntityManager em = factory.createEntityManager();
 
-    private HibarnateUtil(){ }
+    private HibernateUtil(){ }
 
-    public static HibarnateUtil getInstance() {
+    public static HibernateUtil getInstance() {
         if (instance == null){
-            instance = new HibarnateUtil();
+            instance = new HibernateUtil();
         }
         return instance;
     }
 
     public void save(Object o){
         em.getTransaction().begin();
-        if (em.contains(o)){
+        if (!em.contains(o)){
             em.persist(o);
             em.flush();
         }
@@ -30,10 +30,12 @@ public class HibarnateUtil {
 
     public void delete(Class c, Long id){
         em.getTransaction().begin();
+
         Object o = em.find(c, id);
         if (null != o){
             em.remove(o);
         }
+        em.flush();
         em.getTransaction().commit();
     }
 

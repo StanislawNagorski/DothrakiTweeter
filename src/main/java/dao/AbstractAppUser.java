@@ -1,12 +1,12 @@
 package dao;
 
-import hibarnate.HibarnateUtil;
+import hibernate.HibernateUtil;
 
 import javax.persistence.EntityManager;
 
 public class AbstractAppUser {
 
-    protected final HibarnateUtil hibarnateUtil = HibarnateUtil.getInstance();
-    protected final EntityManager em = hibarnateUtil.getEm();
+    protected final HibernateUtil hibernateUtil = HibernateUtil.getInstance();
+    protected final EntityManager em = hibernateUtil.getEm();
 
 }

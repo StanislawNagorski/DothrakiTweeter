@@ -57,7 +57,7 @@ public class MySQLUserDAO extends AbstractAppUser implements AppUserDAO {
     @Override
     public HashSet<AppUser> getFollowers(AppUser loggedUser) {
         Query query = em.createQuery("select followers from AppUser u where u.id = :userID");
-        query.setParameter("userID", loggedUser.getLogin());
+        query.setParameter("userID", loggedUser.getId());
 
         return new HashSet<>(query.getResultList());
     }
@@ -77,11 +77,17 @@ public class MySQLUserDAO extends AbstractAppUser implements AppUserDAO {
 
     @Override
     public void saveUser(AppUser user) {
-        hibarnateUtil.save(user);
+        hibernateUtil.save(user);
     }
 
     @Override
-    public void removeUser(Long id) {
-        hibarnateUtil.delete(AppUser.class,id);
+    public void deleteUser(AppUser user) {
+        unfollowBeforeDelete(user);
+        hibernateUtil.delete(AppUser.class, user.getId());
     }
+
+    private void unfollowBeforeDelete(AppUser user){
+        getFollowers(user).forEach(following -> unfollow(following, user));
+    }
+
 }
