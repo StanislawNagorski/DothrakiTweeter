@@ -130,8 +130,6 @@ public class AppUser {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", registeredSince=" + registeredSince +
-                ", followers=" + followers +
-                ", following=" + following +
                 '}';
     }
 
