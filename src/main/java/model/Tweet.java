@@ -17,11 +17,16 @@ public class Tweet {
     @CreationTimestamp
     private Date publishedAt;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "author_fk")
-    private AppUser author;
 
-    public Tweet() {}
+    private String author;
+
+    public Tweet() {
+    }
+
+    public Tweet(String author, String message) {
+        this.author = author;
+        this.message = new StringBuilder(message).reverse().toString();
+    }
 
     public Long getId() {
         return id;
@@ -31,11 +36,11 @@ public class Tweet {
         this.id = id;
     }
 
-    public AppUser getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(AppUser author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -44,7 +49,7 @@ public class Tweet {
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.message = new StringBuilder(message).reverse().toString();
     }
 
     public Date getPublishedAt() {
@@ -53,6 +58,15 @@ public class Tweet {
 
     public void setPublishedAt(Date publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", publishedAt=" + publishedAt +
+                '}';
     }
 }
 
