@@ -1,17 +1,20 @@
 package dao;
 
+import model.AppUser;
 import model.Tweet;
+
+import java.util.List;
 
 public interface TweetDAO {
 
 
     Tweet getTweet(Long id);
 
-    void addTweet(Tweet tweet);
-
-    void updateTweet(Tweet tweet, Long id);
+    void saveTweet(Tweet tweet);
 
     void deleteTweet(Long id);
+
+    List<Tweet> getUserTweets(AppUser user);
 
 
 }
