@@ -4,6 +4,7 @@ import dao.AbstractMySQLDAO;
 import dao.AppUserDAO;
 import model.AppUser;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.HashSet;
@@ -32,14 +33,22 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     public AppUser getUserByEmail(String email) {
         TypedQuery<AppUser> query = em.createQuery("select u from AppUser u where u.email=:email and u.isActive = true ", AppUser.class);
         query.setParameter("email", email);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
     public AppUser getUserByLogin(String login) {
         TypedQuery<AppUser> query = em.createQuery("select u from AppUser u where u.login=:login", AppUser.class);
         query.setParameter("login", login);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -89,7 +98,7 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         user.setActive(false);
     }
 
-    private void unfollowBeforeDelete(AppUser user){
+    private void unfollowBeforeDelete(AppUser user) {
         getFollowers(user).forEach(following -> unfollow(following, user));
     }
 
