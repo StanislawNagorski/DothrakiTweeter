@@ -186,12 +186,3 @@ public class AppUser {
 }
 
 
-//AppUser:
-//        id: Long
-//        login: String
-//        name: String
-//        lastName: String
-//        email: String
-//        following: Set
-//        followedBy: Set
-//        registeredSince: Date
