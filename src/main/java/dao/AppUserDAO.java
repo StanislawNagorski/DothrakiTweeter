@@ -3,16 +3,17 @@ package dao;
 import model.AppUser;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 public interface AppUserDAO {
 
     HashSet<AppUser> getAll();
 
-    AppUser getUserById(Long id);
+    Optional<AppUser> getUserById(Long id);
 
-    AppUser getUserByEmail(String email);
+    Optional<AppUser> getUserByEmail(String email);
 
-    AppUser getUserByLogin(String login);
+    Optional<AppUser> getUserByLogin(String login);
 
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser);
 

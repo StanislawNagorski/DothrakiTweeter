@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
@@ -23,46 +24,50 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     }
 
     @Override
-    public AppUser getUserById(Long id) {
+    public Optional<AppUser> getUserById(Long id) {
         TypedQuery<AppUser> query = em.createQuery("from AppUser u where u.id=:id", AppUser.class);
         query.setParameter("id", id);
-        return query.getSingleResult();
-    }
-
-    @Override
-    public AppUser getUserByEmail(String email) {
-        TypedQuery<AppUser> query = em.createQuery("select u from AppUser u where u.email=:email and u.isActive = true ", AppUser.class);
-        query.setParameter("email", email);
         try {
-            return query.getSingleResult();
+            return Optional.ofNullable(query.getSingleResult());
         } catch (NoResultException e) {
-            return null;
+            return Optional.empty();
         }
     }
 
     @Override
-    public AppUser getUserByLogin(String login) {
+    public Optional<AppUser> getUserByEmail(String email) {
+        TypedQuery<AppUser> query = em.createQuery("select u from AppUser u where u.email=:email and u.isActive = true ", AppUser.class);
+        query.setParameter("email", email);
+        try {
+            return Optional.ofNullable(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<AppUser> getUserByLogin(String login) {
         TypedQuery<AppUser> query = em.createQuery("select u from AppUser u where u.login=:login", AppUser.class);
         query.setParameter("login", login);
         try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
+            return Optional.ofNullable(query.getSingleResult());
+        } catch (NoResultException e){
+            return Optional.empty();
         }
     }
 
     @Override
     public HashSet<AppUser> getFollowedUsers(AppUser loggedUser) {
-        return new HashSet(loggedUser.getFollowing());
+        return new HashSet<>(loggedUser.getFollowing());
     }
 
     @Override
     public HashSet<AppUser> getNotFollowed(AppUser loggedUSer) {
         TypedQuery<AppUser> query = em.createQuery("select u from AppUser " +
                 "u where u not in :following and u.isActive=true ", AppUser.class);
-        query.setParameter("following", new HashSet(loggedUSer.getFollowing()));
+        query.setParameter("following", new HashSet<>(loggedUSer.getFollowing()));
 
-        return new HashSet(query.getResultList());
+        return new HashSet<>(query.getResultList());
     }
 
     @Override
@@ -70,7 +75,7 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         TypedQuery<AppUser> query = em.createQuery("select followers from AppUser u where u.id = :userID", AppUser.class);
         query.setParameter("userID", loggedUser.getId());
 
-        return new HashSet<>(query.getResultList().stream().filter(o -> o.isActive()).collect(Collectors.toSet()));
+        return query.getResultList().stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
     }
 
 

@@ -4,11 +4,12 @@ import model.AppUser;
 import model.Tweet;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TweetDAO {
 
 
-    Tweet getTweet(Long id);
+    Optional<Tweet> getTweet(Long id);
 
     void saveTweet(Tweet tweet);
 

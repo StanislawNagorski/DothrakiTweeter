@@ -2,45 +2,29 @@ package services.impl;
 
 import dao.AppUserDAO;
 import dao.TweetDAO;
-import dao.impl.MySQLTwitterDAO;
-import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
 import model.AppUser;
-import services.TweetAppService;
+import services.AppUserService;
 
-import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static utils.ServletUtils.*;
 
-public class TweetAppServiceImpl implements TweetAppService {
+public class AppUserServiceImpl implements AppUserService {
 
     private AppUserDAO appUserDAO;
-    private TweetDAO tweetDAO;
 
-    public TweetAppServiceImpl(AppUserDAO appUserDAO, TweetDAO tweetDAO) {
+    public AppUserServiceImpl(AppUserDAO appUserDAO) {
         this.appUserDAO = appUserDAO;
-        this.tweetDAO = tweetDAO;
     }
 
-
     private boolean isUserLoginNoneAvailable(String login) {
-        try {
-            appUserDAO.getUserByLogin(login);
-            return true;
-        } catch (NoResultException e){
-            return false;
-        }
+        return appUserDAO.getUserByLogin(login).isPresent();
     }
 
     private boolean isUserEmailNoneAvailable(String email) {
-        try {
-            appUserDAO.getUserByEmail(email);
-            return true;
-        } catch (NoResultException e){
-            return false;
-        }
+       return appUserDAO.getUserByEmail(email).isPresent();
     }
 
     @Override
@@ -57,7 +41,7 @@ public class TweetAppServiceImpl implements TweetAppService {
 
     @Override
     public void register(AppUser user) {
-        appUserDAO.saveUser(user);
+            appUserDAO.saveUser(user);
     }
 
 
