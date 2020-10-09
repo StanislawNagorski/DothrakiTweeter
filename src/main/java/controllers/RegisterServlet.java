@@ -1,17 +1,18 @@
 package controllers;
 
-import dao.AppUserDAO;
 import dao.impl.MySQLUserDAO;
+import errors.ValidationError;
 import model.AppUser;
 import org.apache.commons.codec.digest.DigestUtils;
+import services.impl.AppUserServiceImpl;
 
-import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "Register", value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -21,6 +22,7 @@ public class RegisterServlet extends HttpServlet {
     public static final String SURNAME = "surname";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
+    public static final String ERRORS = "errors";
 
     @Override
     public void init() throws ServletException {
@@ -29,8 +31,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/register.jsp").forward(req,resp);
-
+        req.getRequestDispatcher("/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -48,23 +49,14 @@ public class RegisterServlet extends HttpServlet {
                 .email(req.getParameter(EMAIL))
                 .build();
 
-        MySQLUserDAO mySQLUserDAO = new MySQLUserDAO();
+        AppUserServiceImpl userService = new AppUserServiceImpl(new MySQLUserDAO());
+        List<ValidationError> errors = userService.validateUser(appUser);
 
-        AppUser userByLogin = mySQLUserDAO.getUserByLogin(appUser.getLogin());
-        AppUser userByEmail = mySQLUserDAO.getUserByEmail(appUser.getEmail());
-
-        if (userByLogin != null) {
-            //TODO przekaż alert o zajętym loginie
+        if (errors.isEmpty()){
+            userService.register(appUser);
+        } else {
+           req.setAttribute(ERRORS,errors);
+           req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
-
-        if (userByEmail != null) {
-            //TODO przekaż alert o zajętym emialu
-        }
-
-        boolean isLoginAndEmailAvaliable = userByLogin == null && userByEmail == null;
-        if (isLoginAndEmailAvaliable){
-            mySQLUserDAO.saveUser(appUser);
-        }
-
     }
 }

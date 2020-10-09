@@ -5,8 +5,10 @@ import dao.TweetDAO;
 import model.AppUser;
 import model.Tweet;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 public class MySQLTwitterDAO extends AbstractMySQLDAO implements TweetDAO {
 
@@ -29,10 +31,11 @@ public class MySQLTwitterDAO extends AbstractMySQLDAO implements TweetDAO {
     }
 
     @Override
-    public Tweet getTweet(Long id) {
-//        TypedQuery<Tweet> query = em.createQuery("from Tweet t where t.id=:id", Tweet.class);
-//        query.setParameter("id", id);
-//        return query.getSingleResult();
-        return em.find(Tweet.class, id);
+    public Optional<Tweet> getTweet(Long id) {
+        try {
+            return Optional.ofNullable(em.find(Tweet.class, id));
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 }

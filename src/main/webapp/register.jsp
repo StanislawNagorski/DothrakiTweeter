@@ -22,7 +22,9 @@
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <h4 class="text-center mb-4 mt-1">Sign up</h4>
         <hr>
+
         <c:if test="${errors != null}">
+
             <c:forEach items="${errors}" var="error">
                 <div class="alert alert-warning">
                     <strong>${error.header}</strong> <br>
@@ -30,6 +32,7 @@
                 </div>
             </c:forEach>
         </c:if>
+
         <form action="register" method="POST" onsubmit="return checkPasswordIdentity(this)">
             <div class="form-group">
                 <div class="input-group">
