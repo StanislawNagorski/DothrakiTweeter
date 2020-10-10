@@ -32,10 +32,6 @@ public class MySQLTwitterDAO extends AbstractMySQLDAO implements TweetDAO {
 
     @Override
     public Optional<Tweet> getTweet(Long id) {
-        try {
-            return Optional.ofNullable(em.find(Tweet.class, id));
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(em.find(Tweet.class, id));
     }
 }

@@ -4,10 +4,12 @@ import dao.AppUserDAO;
 import dao.TweetDAO;
 import errors.ValidationError;
 import model.AppUser;
+import org.apache.commons.codec.digest.DigestUtils;
 import services.AppUserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static utils.ServletUtils.*;
 
@@ -28,12 +30,12 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public  List<ValidationError> validateUser(AppUser user) {
+    public  List<ValidationError> validateUser(String login, String email) {
        List<ValidationError> errors = new ArrayList<>();
-        if (isUserEmailNoneAvailable(user.getEmail())){
+        if (isUserEmailNoneAvailable(email)){
             errors.add(new ValidationError(EMAIL_ERROR_HEADER, EMAIL_ERROR_MESSAGE));
         }
-        if (isUserLoginNoneAvailable(user.getLogin())){
+        if (isUserLoginNoneAvailable(login)){
             errors.add(new ValidationError(LOGIN_ERROR_HEADER, LOGIN_IN_USE_ERROR_MESSAGE));
         }
         return errors;
@@ -42,6 +44,17 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public void register(AppUser user) {
             appUserDAO.saveUser(user);
+    }
+
+    @Override
+    public boolean isLoginAndPasswordValid(String login, String hashedPassword) {
+
+        Optional<AppUser> userByLogin = appUserDAO.getUserByLogin(login);
+        if (userByLogin.isEmpty()){
+            return false;
+        }
+        String passFromDB = userByLogin.get().getPassword();
+        return passFromDB.equals(hashedPassword);
     }
 
 

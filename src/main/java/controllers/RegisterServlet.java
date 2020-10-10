@@ -5,6 +5,7 @@ import errors.ValidationError;
 import model.AppUser;
 import org.apache.commons.codec.digest.DigestUtils;
 import services.impl.AppUserServiceImpl;
+import utils.ServletUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +18,11 @@ import java.util.List;
 @WebServlet(name = "Register", value = "/register")
 public class RegisterServlet extends HttpServlet {
 
-    public static final String LOGIN = "login";
-    public static final String NAME = "name";
-    public static final String SURNAME = "surname";
-    public static final String PASSWORD = "password";
-    public static final String EMAIL = "email";
-    public static final String ERRORS = "errors";
+    private AppUserServiceImpl userService;
 
     @Override
     public void init() throws ServletException {
-        super.init();
+        userService = new AppUserServiceImpl(new MySQLUserDAO());
     }
 
     @Override
@@ -37,26 +33,32 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String userPassword = req.getParameter(PASSWORD);
-        String hashedPassword = DigestUtils.md5Hex(userPassword);
 
-        AppUser appUser = AppUser.UserBuilder
-                .getBuilder()
-                .login(req.getParameter(LOGIN))
-                .name(req.getParameter(NAME))
-                .lastName(req.getParameter(SURNAME))
-                .password(hashedPassword)
-                .email(req.getParameter(EMAIL))
-                .build();
+        String userLogin = req.getParameter(ServletUtils.USER_LOGIN);
+        String userEmail = req.getParameter(ServletUtils.USER_EMAIL);
 
-        AppUserServiceImpl userService = new AppUserServiceImpl(new MySQLUserDAO());
-        List<ValidationError> errors = userService.validateUser(appUser);
+        List<ValidationError> errors = userService.validateUser(userLogin, userEmail);
 
-        if (errors.isEmpty()){
+        if (errors.isEmpty()) {
+
+            String userPassword = req.getParameter(ServletUtils.USER_PASSWORD);
+            String hashedPassword = DigestUtils.md5Hex(userPassword);
+
+            AppUser appUser = AppUser.UserBuilder
+                    .getBuilder()
+                    .login(userLogin)
+                    .name(req.getParameter(ServletUtils.USER_NAME))
+                    .lastName(req.getParameter(ServletUtils.USER_SURNAME))
+                    .password(hashedPassword)
+                    .email(userEmail)
+                    .build();
+
             userService.register(appUser);
+            req.getRequestDispatcher("/login.jsp").forward(req,resp);
+
         } else {
-           req.setAttribute(ERRORS,errors);
-           req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            req.setAttribute(ServletUtils.ERRORS_ATTRIBUTE_NAME, errors);
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
     }
 }

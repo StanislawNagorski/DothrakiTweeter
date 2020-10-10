@@ -98,8 +98,6 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
 
     @Override
     public void deleteUser(AppUser user) {
-//        unfollowBeforeDelete(user);
-//        hibernateUtil.delete(AppUser.class, user.getId());
         user.setActive(false);
     }
 
