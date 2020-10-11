@@ -65,7 +65,7 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         Query query = em.createQuery("from AppUser u where u.login != :login");
         query.setParameter("login", loggedUser.getLogin());
         HashSet<AppUser> appUsers = new HashSet<AppUser>(query.getResultList());
-        appUsers.remove(loggedUser.getFollowing());
+        appUsers.removeAll(loggedUser.getFollowing());
         return appUsers;
 
         //TODO do przepsania w hibarnate tak aby nie pobierać całej listy
