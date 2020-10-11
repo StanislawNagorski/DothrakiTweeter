@@ -10,8 +10,7 @@
     <style>
         body {
             background: #f5f5f5
-        }Choose a file: <input type="file" name="multiPartServlet" />
-    <br>
+        }
 
         .blue {
             background-color: #00b5ec !important;
