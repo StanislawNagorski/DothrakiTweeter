@@ -78,5 +78,15 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserDAO.getFollowedUsers(loggedUser);
     }
 
+    @Override
+    public void followUser(AppUser loggedUser, AppUser userToFollow) {
+        appUserDAO.follow(loggedUser,userToFollow);
+    }
+
+    @Override
+    public void unfollowUser(AppUser loggedUser, AppUser userToFollow) {
+        appUserDAO.unfollow(loggedUser,userToFollow);
+    }
+
 
 }
