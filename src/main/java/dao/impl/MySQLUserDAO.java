@@ -2,14 +2,13 @@ package dao.impl;
 
 import dao.AbstractMySQLDAO;
 import dao.AppUserDAO;
+import hibernate.HibernateUtil;
 import model.AppUser;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
@@ -62,20 +61,23 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     }
 
     @Override
-    public HashSet<AppUser> getNotFollowed(AppUser loggedUSer) {
-        TypedQuery<AppUser> query = em.createQuery("select u from AppUser " +
-                "u where u not in :following and u.isActive=true ", AppUser.class);
-        query.setParameter("following", new HashSet<>(loggedUSer.getFollowing()));
+    public HashSet<AppUser> getNotFollowed(AppUser loggedUser) {
+        Query query = em.createQuery("from AppUser u where u.login != :login");
+        query.setParameter("login", loggedUser.getLogin());
+        HashSet<AppUser> appUsers = new HashSet<AppUser>(query.getResultList());
+        appUsers.remove(loggedUser.getFollowing());
+        return appUsers;
 
-        return new HashSet<>(query.getResultList());
+        //TODO do przepsania w hibarnate tak aby nie pobierać całej listy
     }
 
     @Override
     public HashSet<AppUser> getFollowers(AppUser loggedUser) {
-        TypedQuery<AppUser> query = em.createQuery("select followers from AppUser u where u.id = :userID", AppUser.class);
+        Query query = em.createQuery("select followers from AppUser u where u.id = :userID");
         query.setParameter("userID", loggedUser.getId());
+        ArrayList<AppUser> resultList = new ArrayList<>(query.getResultList());
 
-        return query.getResultList().stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
+        return resultList.stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
     }
 
 

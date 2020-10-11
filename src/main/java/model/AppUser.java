@@ -3,6 +3,8 @@ package model;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class AppUser {
     private String email;
     @CreationTimestamp
     private Date registeredSince;
+    public String icon = "https://i.pinimg.com/originals/73/a0/e8/73a0e8ebdc6343f23c9ed6a780da3ab2.png";
 
     @ManyToMany(mappedBy = "following", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Set<AppUser> followers = new HashSet<>();
