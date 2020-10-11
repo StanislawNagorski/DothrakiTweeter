@@ -1,6 +1,5 @@
 package services.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.*;
 
 import java.io.IOException;
@@ -32,13 +31,10 @@ public class DothrakiTranslator {
                 .build();
 
         Response response = client.newCall(request).execute();
-
-        ObjectMapper objectMapper = new ObjectMapper();
         ResponseBody responseBody = client.newCall(request).execute().body();
-        DothrakiTranslator entity = objectMapper.readValue(responseBody.string(), DothrakiTranslator.class);
-        return entity.name;
 
-        //return response.toString();
+
+        return response.toString();
     }
 
     public static void main(String[] args) throws IOException {

@@ -31,18 +31,18 @@ public class LoginServlet extends HttpServlet {
         String login = null;
         String password = null;
 
-        if (req.getCookies() != null){
+        if (req.getCookies() != null) {
             for (Cookie cookie : req.getCookies()) {
-                if (cookie.getName().equals(ServletUtils.USER_LOGIN)){
+                if (cookie.getName().equals(ServletUtils.USER_LOGIN)) {
                     login = cookie.getValue();
                 }
-                if (cookie.getName().equals(ServletUtils.USER_PASSWORD)){
+                if (cookie.getName().equals(ServletUtils.USER_PASSWORD)) {
                     password = cookie.getValue();
                 }
             }
         }
 
-        if (login != null && password != null){
+        if (login != null && password != null) {
             req.setAttribute(ServletUtils.USER_LOGIN, login);
             req.setAttribute(ServletUtils.USER_PASSWORD, password);
             doPost(req, resp);
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
         String userPassword = req.getParameter(ServletUtils.USER_PASSWORD);
         String hashedPassword;
 
-        if (userLogin == null && userPassword == null){
+        if (userLogin == null && userPassword == null) {
             userLogin = (String) req.getAttribute(ServletUtils.USER_LOGIN);
             hashedPassword = (String) req.getAttribute(ServletUtils.USER_PASSWORD);
         } else {
@@ -77,21 +77,21 @@ public class LoginServlet extends HttpServlet {
         }
 
         String remember = req.getParameter(ServletUtils.REMEMBER);
-        if (isCheckboxChecked(remember)){
+        if (isCheckboxChecked(remember)) {
             addCookies(resp, userLogin, hashedPassword);
         }
         req.getSession().setAttribute(ServletUtils.USER_LOGIN, userLogin);
-        req.getRequestDispatcher("/users.jsp").forward(req, resp);
+        req.getRequestDispatcher("users").forward(req, resp);
     }
 
     private boolean isCheckboxChecked(String remember) {
         return ServletUtils.CHECKBOX_CHECKED.equals(remember);
     }
 
-    private void addCookies(HttpServletResponse response, String login, String hashedPassword){
+    private void addCookies(HttpServletResponse response, String login, String hashedPassword) {
         Cookie loginCookie = new Cookie(ServletUtils.USER_LOGIN, login);
         loginCookie.setMaxAge(60 * 60);
-        Cookie passCookie = new Cookie(ServletUtils.USER_PASSWORD,hashedPassword );
+        Cookie passCookie = new Cookie(ServletUtils.USER_PASSWORD, hashedPassword);
         passCookie.setMaxAge(60 * 60);
         response.addCookie(loginCookie);
         response.addCookie(passCookie);
