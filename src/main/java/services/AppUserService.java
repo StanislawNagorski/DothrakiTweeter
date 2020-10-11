@@ -16,6 +16,8 @@ public interface AppUserService {
     HashSet<AppUser> getFollowers(AppUser loggedUser);
     HashSet<AppUser> getNotFollowed(AppUser loggedUSer);
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser);
+    void followUser(AppUser loggedUser, AppUser userToFollow);
+    void unfollowUser(AppUser loggedUser, AppUser userToFollow);
 
 
 }
