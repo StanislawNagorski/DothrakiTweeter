@@ -1,4 +1,4 @@
-package translation;
+package message_decorators;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -12,17 +12,16 @@ import java.io.IOException;
 public class DothrakiTranslator {
 
     public static final String BASE_URL = "https://api.funtranslations.com/translate/dothraki.json";
-   // public static final String BASE_URL = "https://api.chucknorris.io/jokes/random";
     public static final String JSON_CONTENT = "contents";
     public static final String TRANSLATED_TEXT = "translated";
     public static final String REQUEST_LIMIT_ALERT = "My Khal we are out of free translation!";
+    public static final String CONNECTION_LOST = "My Khal! Translation is not available doe to connection issues";
 
     private String getTranslationJSONStringFromHTTP(String text) throws IOException {
         OkHttpClient httpClient = new OkHttpClient();
 
         HttpUrl url = HttpUrl.parse(BASE_URL);
         HttpUrl.Builder okUrl = url.newBuilder().addQueryParameter("text", text);
-        //HttpUrl okUrl = url;
 
         Request request = new Request.Builder()
                 .url(okUrl.toString())
@@ -45,9 +44,20 @@ public class DothrakiTranslator {
         return (String) contents.get(TRANSLATED_TEXT);
     }
 
+    public String getTranslation(String tweet){
+        String jsonStringFromHTTP;
+        try {
+            jsonStringFromHTTP = getTranslationJSONStringFromHTTP(tweet);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return CONNECTION_LOST;
+        }
+        return getTranslationFromJSON(jsonStringFromHTTP);
+    }
+
     public static void main(String[] args) throws IOException {
         DothrakiTranslator dh = new DothrakiTranslator();
-        String translationJSON = dh.getTranslationJSONStringFromHTTP("Now say me, what is your deepest fear?");
+        String translationJSON = dh.getTranslationJSONStringFromHTTP("What is your deepest fear?");
         System.out.println(dh.getTranslationFromJSON(translationJSON));
 
     }
