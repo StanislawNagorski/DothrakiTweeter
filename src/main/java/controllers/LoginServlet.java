@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
+
         if (login != null && password != null) {
             req.setAttribute(ServletUtils.USER_LOGIN, login);
             req.setAttribute(ServletUtils.USER_PASSWORD, password);
