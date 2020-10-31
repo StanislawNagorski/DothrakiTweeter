@@ -54,14 +54,5 @@ public class DothrakiTranslator {
         }
         return getTranslationFromJSON(jsonStringFromHTTP);
     }
-
-    public static void main(String[] args) throws IOException {
-        DothrakiTranslator dh = new DothrakiTranslator();
-        String translationJSON = dh.getTranslationJSONStringFromHTTP("What is your deepest fear?");
-        System.out.println(dh.getTranslationFromJSON(translationJSON));
-
-    }
-
-
 }
 
