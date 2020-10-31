@@ -11,6 +11,8 @@ public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 300)
     private String message;
 
     @Column(name = "published_at")
@@ -25,7 +27,7 @@ public class Tweet {
 
     public Tweet(String author, String message) {
         this.author = author;
-        this.message = new StringBuilder(message).reverse().toString();
+        this.message = message;
     }
 
     public Long getId() {
@@ -49,7 +51,7 @@ public class Tweet {
     }
 
     public void setMessage(String message) {
-        this.message = new StringBuilder(message).reverse().toString();
+        this.message = message;
     }
 
     public Date getPublishedAt() {
