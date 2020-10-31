@@ -14,7 +14,7 @@ public class DothrakiTranslator {
     public static final String BASE_URL = "https://api.funtranslations.com/translate/dothraki.json";
     public static final String JSON_CONTENT = "contents";
     public static final String TRANSLATED_TEXT = "translated";
-    public static final String REQUEST_LIMIT_ALERT = "My Khal we are out of free translation!";
+    public static final String REQUEST_LIMIT_ALERT = "My Khal we are out of free translations!";
     public static final String CONNECTION_LOST = "My Khal! Translation is not available doe to connection issues";
 
     private String getTranslationJSONStringFromHTTP(String text) throws IOException {
@@ -31,7 +31,10 @@ public class DothrakiTranslator {
         if (!response.isSuccessful()) {
             return "";
         }
-        return response.body().string();
+        String jsonString = response.body().string();
+        response.close();
+
+        return jsonString;
     }
 
     private String getTranslationFromJSON(String jsonString){
