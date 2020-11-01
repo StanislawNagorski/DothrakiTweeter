@@ -48,6 +48,7 @@
                 <a href="#"><b>Change email </b></a>
                 <br>
                 <a href="#"><b>Change password </b></a>
+                <br>
                 <strong class="d-block text-gray-dark">Avatar:
                     <img src="<c:url value = "${user.avatar}"/>" alt=""
                          class="mr-2 rounded" width="32" height="32">
