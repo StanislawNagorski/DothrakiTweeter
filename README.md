@@ -9,7 +9,13 @@ This app is to help you with language learning! (but if you need to improve your
 
 About project:
 -
-This project was created during classes with SDA, to learn jsp technology. I decided to develop it further, to get a better understanding of technology stack and just to play with it a little :)  
+This project was created during classes with SDA, to learn jsp technology. 
+I decided to develop it further, to get a better understanding of technology stack 
+and just to play with it a little :)
+- What I added to project:
+- password hashing,
+- dothraki translation, 
+- "edit-profile" page with avatar upload.
 
 Technology stack:
 -
@@ -20,7 +26,7 @@ Technology stack:
 - Dothraki API,
 - MD5 hash.
 
-What I have learn in this project:
+What I have learned in this project:
 -
 - Proper project structure and packaging.
 - Basic kanban methodology implemented into GitHub.

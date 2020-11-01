@@ -4,6 +4,7 @@ import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
 import model.AppUser;
 import org.apache.commons.codec.digest.DigestUtils;
+import security.PasswordHasher;
 import services.impl.AppUserServiceImpl;
 import utils.ServletUtils;
 
@@ -42,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
         if (errors.isEmpty()) {
 
             String userPassword = req.getParameter(ServletUtils.USER_PASSWORD);
-            String hashedPassword = DigestUtils.md5Hex(userPassword);
+            String hashedPassword = PasswordHasher.hash(userPassword);
 
             AppUser appUser = AppUser.UserBuilder
                     .getBuilder()
