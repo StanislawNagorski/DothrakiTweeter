@@ -2,7 +2,6 @@ package controllers;
 
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
-import org.apache.commons.codec.digest.DigestUtils;
 import security.PasswordHasher;
 import services.impl.AppUserServiceImpl;
 import utils.ServletUtils;
