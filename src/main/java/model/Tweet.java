@@ -19,7 +19,6 @@ public class Tweet {
     @CreationTimestamp
     private Date publishedAt;
 
-
     private String author;
 
     public Tweet() {

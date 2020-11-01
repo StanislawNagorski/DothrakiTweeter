@@ -2,6 +2,7 @@ package controllers;
 
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
+import model.AppUser;
 import security.PasswordHasher;
 import services.impl.AppUserServiceImpl;
 import utils.ServletUtils;
@@ -42,7 +43,6 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-
         if (login != null && password != null) {
             req.setAttribute(ServletUtils.USER_LOGIN, login);
             req.setAttribute(ServletUtils.USER_PASSWORD, password);
@@ -81,7 +81,12 @@ public class LoginServlet extends HttpServlet {
         if (isCheckboxChecked(remember)) {
             addCookies(resp, userLogin, hashedPassword);
         }
+        AppUser userByLogin = userService.getUserByLogin(userLogin);
+        String avatar = userByLogin.getAvatar();
+
+        req.getSession().setAttribute(ServletUtils.USER_AVATAR, avatar);
         req.getSession().setAttribute(ServletUtils.USER_LOGIN, userLogin);
+
         req.getRequestDispatcher("users").forward(req, resp);
     }
 
