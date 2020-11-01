@@ -3,6 +3,7 @@ package controllers;
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
 import org.apache.commons.codec.digest.DigestUtils;
+import security.PasswordHasher;
 import services.impl.AppUserServiceImpl;
 import utils.ServletUtils;
 
@@ -64,7 +65,7 @@ public class LoginServlet extends HttpServlet {
             userLogin = (String) req.getAttribute(ServletUtils.USER_LOGIN);
             hashedPassword = (String) req.getAttribute(ServletUtils.USER_PASSWORD);
         } else {
-            hashedPassword = DigestUtils.md5Hex(userPassword);
+            hashedPassword = PasswordHasher.hash(userPassword);
         }
 
         boolean credsInvalid = !userService.isLoginAndPasswordValid(userLogin, hashedPassword);
