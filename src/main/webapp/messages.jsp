@@ -45,6 +45,8 @@
             <div class="media text-muted pt-3">
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"
                      height="32">
+
+<%--                TODO: czy trzeba do twita dodac Usera jako autora??--%>
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
                             ${tweet.author}

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ServletUtils {
     public static final String ERRORS_ATTRIBUTE_NAME = "errors";
+    public static final String USER = "user";
     public static final String USER_NAME = "name";
     public static final String USER_SURNAME = "surname";
     public static final String USER_LOGIN = "login";
@@ -26,6 +27,7 @@ public class ServletUtils {
     public static final String TWEET_MESSAGE_PARAM = "tweetMessage";
     public static final String FOLLOWERS = "followers";
     public static final String TWEET_ID = "tweetId";
+    public static final String USER_AVATAR = "avatar";
 
     public static String getUserLoginFromSession(HttpServletRequest req) {
         return (String) req.getSession().getAttribute(USER_LOGIN);

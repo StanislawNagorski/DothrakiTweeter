@@ -37,12 +37,10 @@ public class UsersServlet extends HttpServlet {
         HashSet<AppUser> followedUsers = service.getFollowedUsers(user);
         HashSet<AppUser> notFollowed = service.getNotFollowed(user);
         HashSet<AppUser> followers = service.getFollowers(user);
-        String icon = user.getIcon();
 
         req.setAttribute(ServletUtils.FOLLOWED_USERS, followedUsers);
         req.setAttribute(ServletUtils.NOT_FOLLOWED_USERS, notFollowed);
         req.setAttribute(ServletUtils.FOLLOWERS, followers);
-        req.setAttribute("icon", icon);
 
         req.getRequestDispatcher("/users.jsp").forward(req, resp);
 
