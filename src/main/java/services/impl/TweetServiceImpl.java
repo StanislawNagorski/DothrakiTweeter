@@ -23,7 +23,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public void addTweet(String author, String message) {
+    public void addTweet(AppUser author, String message) {
         Tweet tweet = new Tweet(author, modifyMessage(message));
         tweetDAO.saveTweet(tweet);
     }

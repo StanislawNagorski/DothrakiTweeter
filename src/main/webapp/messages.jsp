@@ -19,8 +19,7 @@
         .box-shadow {
             box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
         }
-
-        .blue {
+o        .blue {
             background-color: #00b5ec !important;
         }
     </style>
@@ -49,7 +48,7 @@
 <%--                TODO: czy trzeba do twita dodac Usera jako autora??--%>
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
-                            ${tweet.author}
+                            ${tweet.author.login}
                         <br>
                     </strong>
                     <strong class="d-block text-gray-dark"></strong>
@@ -58,7 +57,7 @@
                     <br>
                     <b>Published at : <fmt:formatDate value="${tweet.publishedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></b>
                 </p>
-                <c:if test="${tweet.author.equals(sessionScope.login)}">
+                <c:if test="${tweet.author.login.equals(sessionScope.login)}">
                     <a href="deleteTweet?tweetId=${tweet.id}">Delete</a>
                 </c:if>
             </div>
