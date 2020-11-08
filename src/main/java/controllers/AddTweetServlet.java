@@ -34,8 +34,7 @@ public class AddTweetServlet extends HttpServlet {
         AppUser user = appUserService.getUserByLogin(ServletUtils.getUserLoginFromSession(req));
         String tweetMessage = req.getParameter(ServletUtils.TWEET_MESSAGE_PARAM);
 
-        tweetService.addTweet(user.getLogin(), tweetMessage);
-
+        tweetService.addTweet(user, tweetMessage);
         req.getRequestDispatcher("messages").forward(req,resp);
     }
 

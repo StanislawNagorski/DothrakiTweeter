@@ -19,12 +19,13 @@ public class Tweet {
     @CreationTimestamp
     private Date publishedAt;
 
-    private String author;
+    @ManyToOne
+    private AppUser author;
 
     public Tweet() {
     }
 
-    public Tweet(String author, String message) {
+    public Tweet(AppUser author, String message) {
         this.author = author;
         this.message = message;
     }
@@ -37,11 +38,11 @@ public class Tweet {
         this.id = id;
     }
 
-    public String getAuthor() {
+    public AppUser getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(AppUser author) {
         this.author = author;
     }
 

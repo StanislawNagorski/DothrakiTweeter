@@ -26,23 +26,25 @@ public class AppUser {
     private Set<AppUser> followers = new HashSet<>();
     private String avatar = "resources/img/smallfolk.jpg";
 
-    public String getAvatar() {
-        return avatar;
+    @OneToMany
+    private Set<Tweet> tweets = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name = "follower_followed",
+            joinColumns = {@JoinColumn(name = "follower_fk")},
+            inverseJoinColumns = {@JoinColumn(name = "followed_fk")})
+    private Set<AppUser> following = new HashSet<>();
+
+    public AppUser() {
     }
+
+    private boolean isActive;
+
+    public String getAvatar() { return avatar; }
 
     public void setAvatar(String icon) {
         this.avatar = icon;
     }
-
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @JoinTable(name = "follower_followed",
-    joinColumns = {@JoinColumn(name = "follower_fk")},
-    inverseJoinColumns = {@JoinColumn(name = "followed_fk")})
-    private Set<AppUser> following = new HashSet<>();
-
-    private boolean isActive;
-
-    public AppUser() {}
 
     public boolean isActive() {
         return isActive;
@@ -157,29 +159,36 @@ public class AppUser {
         private String login;
         private String password;
         private String email;
+
         public static UserBuilder getBuilder() {
             return new UserBuilder();
         }
+
         public UserBuilder login(String login) {
             this.login = login;
             return this;
         }
+
         public UserBuilder name(String name) {
             this.name = name;
             return this;
         }
+
         public UserBuilder lastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
+
         public UserBuilder password(String password) {
             this.password = password;
             return this;
         }
+
         public UserBuilder email(String email) {
             this.email = email;
             return this;
         }
+
         public AppUser build() {
             AppUser user = new AppUser();
             user.setLogin(this.login);

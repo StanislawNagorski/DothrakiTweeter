@@ -24,8 +24,8 @@ public class MySQLTwitterDAO extends AbstractMySQLDAO implements TweetDAO {
 
     @Override
     public List<Tweet> getUserTweets(AppUser user) {
-        TypedQuery<Tweet> query = em.createQuery("from Tweet t where t.author=:login", Tweet.class);
-        query.setParameter("login", user.getLogin());
+        TypedQuery<Tweet> query = em.createQuery("from Tweet t where t.author.id=:user_id", Tweet.class);
+        query.setParameter("user_id", user.getId());
 
         return query.getResultList();
     }
