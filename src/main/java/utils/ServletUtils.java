@@ -28,6 +28,9 @@ public class ServletUtils {
     public static final String FOLLOWERS = "followers";
     public static final String TWEET_ID = "tweetId";
     public static final String USER_AVATAR = "avatar";
+    public static final String PROFILE_EDIT = "editField";
+    public static final String PROFILE_EDIT_TYPE = "type";
+
 
     public static String getUserLoginFromSession(HttpServletRequest req) {
         return (String) req.getSession().getAttribute(USER_LOGIN);

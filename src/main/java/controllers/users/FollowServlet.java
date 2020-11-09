@@ -1,4 +1,4 @@
-package controllers;
+package controllers.users;
 
 import dao.impl.MySQLUserDAO;
 import model.AppUser;
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet (name = "Unfollow", value = "/unfollow")
-public class UnfollowServlet extends HttpServlet {
+@WebServlet (name = "Follow", value = "/follow")
+public class FollowServlet extends HttpServlet {
 
     private AppUserService service;
 
@@ -27,9 +27,9 @@ public class UnfollowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userLoginFromSession = ServletUtils.getUserLoginFromSession(req);
         AppUser loggedUser = service.getUserByLogin(userLoginFromSession);
-        AppUser userToUnfollow = service.getUserByLogin(req.getParameter(ServletUtils.USER_LOGIN_TO_STOP_FOLLOW));
+        AppUser userToFollow = service.getUserByLogin(req.getParameter(ServletUtils.USER_LOGIN_TO_FOLLOW));
 
-        service.unfollowUser(loggedUser,userToUnfollow);
+        service.followUser(loggedUser,userToFollow);
         req.getRequestDispatcher("users").forward(req,resp);
     }
 

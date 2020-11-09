@@ -1,4 +1,4 @@
-package controllers;
+package controllers.users;
 
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;

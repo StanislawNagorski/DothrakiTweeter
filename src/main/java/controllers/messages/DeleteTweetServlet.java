@@ -1,4 +1,4 @@
-package controllers;
+package controllers.messages;
 
 import dao.impl.MySQLTwitterDAO;
 import org.apache.commons.codec.digest.DigestUtils;

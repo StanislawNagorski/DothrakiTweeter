@@ -1,10 +1,9 @@
-package controllers;
+package controllers.users.profile_edit;
 
 import dao.impl.MySQLUserDAO;
 import model.AppUser;
 import services.AppUserService;
 import services.impl.AppUserServiceImpl;
-import utils.ServletUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +25,20 @@ public class EditProfileServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userLoginFromSession = getUserLoginFromSession(req);
         AppUser user = service.getUserByLogin(userLoginFromSession);
 
+        String whatChange = req.getParameter(PROFILE_EDIT);
+        String typeOfFieldToChange = req.getParameter(PROFILE_EDIT_TYPE);
+
+        req.setAttribute(PROFILE_EDIT_TYPE, typeOfFieldToChange);
+        req.setAttribute(PROFILE_EDIT, whatChange);
         req.setAttribute(USER, user);
         req.getRequestDispatcher("/profileEdit.jsp").forward(req,resp);
 

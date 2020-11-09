@@ -15,7 +15,8 @@ and just to play with it a little :)
 - What I added to project:
 - password hashing,
 - dothraki translation, 
-- "edit-profile" page with avatar upload.
+- "edit-profile" page,
+- avatars integrations,
 
 Technology stack:
 -
