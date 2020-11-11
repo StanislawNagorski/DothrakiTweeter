@@ -88,11 +88,10 @@ public class AppUserServiceImpl implements AppUserService {
         if (userByLogin.isEmpty()) {
             return false;
         }
-        return userByLogin.get().isActive();
+        return !userByLogin.get().isActive();
     }
 
         private boolean isLoginAndPasswordValid(String login, String hashedPassword) {
-
         Optional<AppUser> userByLogin = appUserDAO.getUserByLogin(login);
         if (userByLogin.isEmpty()) {
             return false;

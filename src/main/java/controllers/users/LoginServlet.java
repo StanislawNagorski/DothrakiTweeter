@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
             hashedPassword = PasswordHasher.hash(userPassword);
         }
 
-        List<ValidationError> validationErrors = userService.loginValidation(userLogin, userPassword);
+        List<ValidationError> validationErrors = userService.loginValidation(userLogin, hashedPassword);
         if (!validationErrors.isEmpty()) {
             req.setAttribute(ServletUtils.ERRORS_ATTRIBUTE_NAME, validationErrors);
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
