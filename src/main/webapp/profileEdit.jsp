@@ -68,7 +68,7 @@
                 <a href="profileEdit?editField=avatar&type=file"><b>Change avatar </b></a>
                 <br>
                 <br>
-                <a href=""><b>DELETE ACCOUNT </b></a>
+                <a href="https://www.wp.pl" onclick="confirmDelete()"> <b>DELETE ACCOUNT </b></a>
 
             </p>
         </div>
@@ -136,6 +136,17 @@
             return false;
         }
         return true;
+    }
+
+    function confirmDelete() {
+        var txt;
+        var r = confirm("Are You sure You want delete account?");
+        // if (r == true) {
+        //     txt = "You pressed OK!";
+        // } else {
+        //     txt = "You pressed Cancel!";
+        // }
+        // document.getElementById("demo").innerHTML = txt;
     }
 </script>
 </body>
