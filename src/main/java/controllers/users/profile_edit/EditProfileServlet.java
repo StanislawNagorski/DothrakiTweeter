@@ -8,15 +8,22 @@ import services.AppUserService;
 import services.impl.AppUserServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 
 import static utils.ServletUtils.*;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 5)
 @WebServlet(name = "EditProfile", value = "/profileEdit")
 public class EditProfileServlet extends HttpServlet {
 
@@ -73,9 +80,40 @@ public class EditProfileServlet extends HttpServlet {
                 service.changeLogin(user, newUserLogin);
                 req.getSession().setAttribute(USER_LOGIN, newUserLogin);
             }
-
         }
+
+        if (!req.getParts().isEmpty()){
+            String uploadPath = getServletContext().getRealPath("") + UPLOAD_DIRECTORY;
+            System.out.println(uploadPath);
+
+            Collection<Part> parts = req.getParts();
+            for (Part part : parts) {
+                String header = part.getHeader("content-disposition");
+
+                if (header.contains(USER_AVATAR)) {
+                    String fileName = writeFileToDir(uploadPath, part);
+                    service.changeAvatar(user,fileName);
+                    req.getSession().setAttribute(USER_AVATAR,fileName);
+                }
+
+            }
+        }
+
         doGet(req, resp);
+    }
+    private String writeFileToDir(String uploadPath, Part part) throws IOException {
+        String uploadedFileName = getFileName(part);
+        String fileName = uploadPath + File.separator + uploadedFileName;
+        part.write(fileName);
+        return UPLOAD_DIRECTORY + File.separator + uploadedFileName;
+    }
+
+    private String getFileName(Part part) {
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename"))
+                return content.substring(content.indexOf("=") + 2, content.length() - 1);
+        }
+        return "";
     }
 
     @Override

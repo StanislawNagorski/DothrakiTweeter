@@ -1,6 +1,7 @@
 package utils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 public class ServletUtils {
     public static final String ERRORS_ATTRIBUTE_NAME = "errors";
@@ -31,6 +32,7 @@ public class ServletUtils {
     public static final String PROFILE_EDIT = "editField";
     public static final String PROFILE_EDIT_TYPE = "type";
     public static final String TYPE_TEXT = "text";
+    public static final String UPLOAD_DIRECTORY = "resources" + File.separator + "img";
 
 
     public static String getUserLoginFromSession(HttpServletRequest req) {
