@@ -83,24 +83,27 @@ public class EditProfileServlet extends HttpServlet {
         }
 
         if (!req.getParts().isEmpty()){
-            String uploadPath = getServletContext().getRealPath("") + UPLOAD_DIRECTORY;
-            System.out.println(uploadPath);
-
-            Collection<Part> parts = req.getParts();
-            for (Part part : parts) {
-                String header = part.getHeader("content-disposition");
-
-                if (header.contains(USER_AVATAR)) {
-                    String fileName = writeFileToDir(uploadPath, part);
-                    service.changeAvatar(user,fileName);
-                    req.getSession().setAttribute(USER_AVATAR,fileName);
-                }
-
-            }
+            changeUserAvatar(req, user);
         }
 
         doGet(req, resp);
     }
+
+    private void changeUserAvatar(HttpServletRequest req, AppUser user) throws IOException, ServletException {
+        String uploadPath = getServletContext().getRealPath("") + UPLOAD_DIRECTORY;
+        Collection<Part> parts = req.getParts();
+        for (Part part : parts) {
+            String header = part.getHeader("content-disposition");
+
+            if (header.contains(USER_AVATAR)) {
+                String fileName = writeFileToDir(uploadPath, part);
+                service.changeAvatar(user,fileName);
+                req.getSession().setAttribute(USER_AVATAR,fileName);
+            }
+
+        }
+    }
+
     private String writeFileToDir(String uploadPath, Part part) throws IOException {
         String uploadedFileName = getFileName(part);
         String fileName = uploadPath + File.separator + uploadedFileName;

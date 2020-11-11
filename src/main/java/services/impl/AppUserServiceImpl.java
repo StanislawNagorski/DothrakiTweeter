@@ -6,6 +6,7 @@ import errors.ValidationError;
 import model.AppUser;
 import org.apache.commons.codec.digest.DigestUtils;
 import services.AppUserService;
+import utils.ServletUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -64,8 +65,33 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public boolean isLoginAndPasswordValid(String login, String hashedPassword) {
+    public void deactivate(AppUser user) {
+        appUserDAO.deleteUser(user);
+    }
 
+    @Override
+    public List<ValidationError> loginValidation(String login, String password) {
+        List<ValidationError> errors = new ArrayList<>();
+
+        if (!isLoginAndPasswordValid(login, password)){
+            errors.add(new ValidationError(PASSWORD_ERROR_HEADER, WRONG_PASSWORD_ERROR_MESSAGE));
+        }
+        if (isUserNoneActive(login)){
+            errors.add(new ValidationError(USER_INACTIVE_ERROR_HEADER, USER_INACTIVE_ERROR_MESSAGE));
+        }
+        return errors;
+    }
+
+
+    private boolean isUserNoneActive(String login) {
+        Optional<AppUser> userByLogin = appUserDAO.getUserByLogin(login);
+        if (userByLogin.isEmpty()) {
+            return false;
+        }
+        return !userByLogin.get().isActive();
+    }
+
+        private boolean isLoginAndPasswordValid(String login, String hashedPassword) {
         Optional<AppUser> userByLogin = appUserDAO.getUserByLogin(login);
         if (userByLogin.isEmpty()) {
             return false;
