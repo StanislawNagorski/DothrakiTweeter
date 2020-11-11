@@ -16,6 +16,8 @@ public class ServletUtils {
     public static final String LOGIN_ERROR_HEADER = "INVALID LOGIN";
     public static final String EMAIL_ERROR_HEADER = "INVALID EMAIL";
     public static final String PASSWORD_ERROR_HEADER = "INVALID PASSWORD";
+    public static final String USER_INACTIVE_ERROR_HEADER = "This user account is not active";
+    public static final String USER_INACTIVE_ERROR_MESSAGE = "Contact support to restore this account";
     public static final String LOGIN_NOT_EXIST_MESSAGE = "Typed login do not exist";
     public static final String LOGIN_IN_USE_ERROR_MESSAGE = "Typed login is already in use";
     public static final String WRONG_PASSWORD_ERROR_MESSAGE = "Typed password do not match user";

@@ -12,9 +12,9 @@ public interface AppUserService {
     Optional<ValidationError> validateLogin(String login);
     Optional<ValidationError> validateEmail(String email);
     List<ValidationError> validateUser(String login, String email);
+    List<ValidationError> loginValidation(String login, String password);
     void register(AppUser user);
     void deactivate(AppUser user);
-    boolean isLoginAndPasswordValid(String login, String password);
     AppUser getUserByLogin(String login);
     HashSet<AppUser> getFollowers(AppUser loggedUser);
     HashSet<AppUser> getNotFollowed(AppUser loggedUSer);

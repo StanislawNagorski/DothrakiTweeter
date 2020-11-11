@@ -67,12 +67,9 @@ public class LoginServlet extends HttpServlet {
             hashedPassword = PasswordHasher.hash(userPassword);
         }
 
-        boolean credsInvalid = !userService.isLoginAndPasswordValid(userLogin, hashedPassword);
-        if (credsInvalid) {
-            List<ValidationError> errors = new ArrayList<>();
-            ValidationError validationError = new ValidationError(ServletUtils.PASSWORD_ERROR_HEADER, ServletUtils.WRONG_PASSWORD_ERROR_MESSAGE);
-            errors.add(validationError);
-            req.setAttribute(ServletUtils.ERRORS_ATTRIBUTE_NAME, errors);
+        List<ValidationError> validationErrors = userService.loginValidation(userLogin, userPassword);
+        if (!validationErrors.isEmpty()) {
+            req.setAttribute(ServletUtils.ERRORS_ATTRIBUTE_NAME, validationErrors);
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
             return;
         }

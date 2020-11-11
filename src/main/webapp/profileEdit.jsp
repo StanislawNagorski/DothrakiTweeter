@@ -68,7 +68,7 @@
                 <a href="profileEdit?editField=avatar&type=file"><b>Change avatar </b></a>
                 <br>
                 <br>
-                <a href="#" onclick="return confirm('Are you sure?')"> <b>DELETE ACCOUNT </b></a>
+                <a href="deleteProfile" onclick="return confirm('Are you sure?')"> <b>DELETE ACCOUNT </b></a>
 
             </p>
         </div>
