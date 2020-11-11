@@ -42,8 +42,16 @@ public class EditProfileServlet extends HttpServlet {
         }
         if (req.getParameter(USER_EMAIL) != null) {
             String newUserEmail = req.getParameter(USER_EMAIL);
-            //TODO emailcheck
-            service.changeEmail(user, newUserEmail);
+            Optional<ValidationError> validationError = service.validateEmail(newUserEmail);
+            if (validationError.isPresent()){
+                req.setAttribute(ERRORS_ATTRIBUTE_NAME, validationError.get());
+                req.setAttribute(PROFILE_EDIT, USER_EMAIL);
+                req.setAttribute(PROFILE_EDIT_TYPE, TYPE_TEXT);
+                req.setAttribute(USER, user);
+                req.getRequestDispatcher("/profileEdit.jsp").forward(req, resp);
+            } else {
+                service.changeEmail(user, newUserEmail);
+            }
         }
         if (req.getParameter(USER_PASSWORD) != null) {
             String newUserPassword = req.getParameter(USER_PASSWORD);
