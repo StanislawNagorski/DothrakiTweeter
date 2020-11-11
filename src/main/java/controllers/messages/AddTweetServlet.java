@@ -1,4 +1,4 @@
-package controllers;
+package controllers.messages;
 
 import dao.impl.MySQLTwitterDAO;
 import dao.impl.MySQLUserDAO;
@@ -16,12 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-@WebServlet(name = "Messages", value = "/messages")
-public class MessagesServlet extends HttpServlet {
+@WebServlet(name = "AddTweet", value = "/addMessage")
+public class AddTweetServlet extends HttpServlet {
 
     private TweetService tweetService;
     private AppUserService appUserService;
@@ -35,24 +32,14 @@ public class MessagesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AppUser user = appUserService.getUserByLogin(ServletUtils.getUserLoginFromSession(req));
-        Set<AppUser> followed = user.getFollowing();
-        List<Tweet> allTweets = followed.stream()
-                .flatMap(u -> tweetService.getUserTweets(u).stream())
-                .collect(Collectors.toList());
+        String tweetMessage = req.getParameter(ServletUtils.TWEET_MESSAGE_PARAM);
 
-        allTweets.addAll(tweetService.getUserTweets(user));
-
-        List<Tweet> allTweetsSorted = allTweets.stream()
-                .sorted((t1, t2) -> t2.getPublishedAt().compareTo(t1.getPublishedAt()))
-                .collect(Collectors.toList());
-
-        req.setAttribute(ServletUtils.FOLLOWED_TWEETS, allTweetsSorted);
-        req.getRequestDispatcher("/messages.jsp").forward(req,resp);
+        tweetService.addTweet(user, tweetMessage);
+        req.getRequestDispatcher("messages").forward(req,resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       doGet(req, resp);
+        doGet(req,resp);
     }
 }

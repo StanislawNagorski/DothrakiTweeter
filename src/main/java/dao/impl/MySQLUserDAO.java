@@ -50,7 +50,7 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         query.setParameter("login", login);
         try {
             return Optional.ofNullable(query.getSingleResult());
-        } catch (NoResultException e){
+        } catch (NoResultException e) {
             return Optional.empty();
         }
     }
@@ -98,9 +98,46 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         hibernateUtil.save(user);
     }
 
+
     @Override
     public void deleteUser(AppUser user) {
         user.setActive(false);
+    }
+
+    @Override
+    public void setLogin(AppUser appUser, String newLogin) {
+       appUser.setLogin(newLogin);
+       hibernateUtil.save(appUser);
+    }
+
+    @Override
+    public void setName(AppUser appUser, String newName) {
+        appUser.setName(newName);
+        hibernateUtil.save(appUser);
+    }
+
+    @Override
+    public void setLastName(AppUser appUser, String newLastName) {
+        appUser.setLastName(newLastName);
+        hibernateUtil.save(appUser);
+    }
+
+    @Override
+    public void setEmail(AppUser appUser, String newEmail) {
+        appUser.setEmail(newEmail);
+        hibernateUtil.save(appUser);
+    }
+
+    @Override
+    public void setPassword(AppUser appUser, String newPassword) {
+        appUser.setPassword(newPassword);
+        hibernateUtil.save(appUser);
+    }
+
+    @Override
+    public void setAvatar(AppUser appUser, String avatarPath) {
+        appUser.setAvatar(avatarPath);
+        hibernateUtil.save(appUser);
     }
 
     private void unfollowBeforeDelete(AppUser user) {

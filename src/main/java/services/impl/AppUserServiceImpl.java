@@ -31,6 +31,22 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public Optional<ValidationError> validateLogin(String login) {
+        if (isUserLoginNoneAvailable(login)){
+            return Optional.of(new ValidationError(LOGIN_ERROR_HEADER, LOGIN_IN_USE_ERROR_MESSAGE));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ValidationError> validateEmail(String email) {
+        if (isUserEmailNoneAvailable(email)){
+            return Optional.of(new ValidationError(EMAIL_ERROR_HEADER, EMAIL_ERROR_MESSAGE));
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public List<ValidationError> validateUser(String login, String email) {
         List<ValidationError> errors = new ArrayList<>();
         if (isUserEmailNoneAvailable(email)) {
@@ -86,6 +102,36 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public void unfollowUser(AppUser loggedUser, AppUser userToFollow) {
         appUserDAO.unfollow(loggedUser,userToFollow);
+    }
+
+    @Override
+    public void changeLogin(AppUser appUser, String newLogin) {
+        appUserDAO.setLogin(appUser, newLogin);
+    }
+
+    @Override
+    public void changeName(AppUser appUser, String newName) {
+      appUserDAO.setName(appUser,newName);
+    }
+
+    @Override
+    public void changeLastName(AppUser appUser, String newLastName) {
+       appUserDAO.setLastName(appUser,newLastName);
+    }
+
+    @Override
+    public void changeEmail(AppUser appUser, String newEmail) {
+        appUserDAO.setEmail(appUser,newEmail);
+    }
+
+    @Override
+    public void changePassword(AppUser appUser, String newPassword) {
+        appUserDAO.setPassword(appUser,newPassword);
+    }
+
+    @Override
+    public void changeAvatar(AppUser appUser, String avatarPath) {
+        appUserDAO.setAvatar(appUser, avatarPath);
     }
 
 

@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface AppUserService {
 
+    Optional<ValidationError> validateLogin(String login);
+    Optional<ValidationError> validateEmail(String email);
     List<ValidationError> validateUser(String login, String email);
     void register(AppUser user);
     boolean isLoginAndPasswordValid(String login, String password);
@@ -18,6 +20,17 @@ public interface AppUserService {
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser);
     void followUser(AppUser loggedUser, AppUser userToFollow);
     void unfollowUser(AppUser loggedUser, AppUser userToFollow);
+
+    void changeLogin(AppUser appUser, String newLogin);
+    void changeName(AppUser appUser, String newName);
+    void changeLastName(AppUser appUser, String newLastName);
+    void changeEmail(AppUser appUser, String newEmail);
+    void changePassword(AppUser appUser, String newPassword);
+    void changeAvatar(AppUser appUser, String avatarPath);
+
+
+
+
 
 
 }
