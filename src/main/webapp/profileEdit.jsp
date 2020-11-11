@@ -30,6 +30,14 @@
     <%@include file="header.jsp" %>
 
     <div class="my-3 p-3 bg-white rounded box-shadow">
+
+        <c:if test="${errors != null}">
+                <div class="alert alert-warning">
+                    <strong>${errors.header}</strong> <br>
+                    <p>${errors.message}<p>
+                </div>
+        </c:if>
+
         <h6 class="border-bottom border-gray pb-2 mb-0">Your account</h6>
 
         <div class="media text-muted pt-3">
@@ -40,11 +48,13 @@
                     <fmt:formatDate value="${user.registeredSince}" pattern="yyyy-MM-dd HH-mm"/> </strong>
 
                 <strong class="d-block text-gray-dark">Login: ${user.login}</strong>
+                <a href="profileEdit?editField=login&type=text"><b>Change login</b></a>
+
                 <strong class="d-block text-gray-dark">Name: ${user.name}</strong>
                 <a href="profileEdit?editField=name&type=text"><b>Change name</b></a>
 
                 <strong class="d-block text-gray-dark">Surname: ${user.lastName}</strong>
-                <a href="profileEdit?editField=lastname&type=text"><b>Change lastname </b></a>
+                <a href="profileEdit?editField=surname&type=text"><b>Change lastname </b></a>
 
                 <strong class="d-block text-gray-dark">email: ${user.email}</strong>
                 <a href="profileEdit?editField=email&type=email"><b>Change email </b></a>
@@ -56,13 +66,17 @@
                          class="mr-2 rounded" width="32" height="32">
                 </strong>
                 <a href="#"><b>Change avatar </b></a>
+                <br>
+                <br>
+                <a href=""><b>DELETE ACCOUNT </b></a>
+
             </p>
         </div>
 
         <br>
 
         <c:if test="${editField != null}">
-        <form action="register" method="POST" onsubmit="return checkPasswordIdentity(this)">
+        <form action="profileEdit" method="POST" onsubmit="return checkPasswordIdentity(this)">
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -93,7 +107,15 @@
     </div>
 
 </main>
-
+<script>
+    function checkPasswordIdentity(form) {
+        if (form.password.value !== form.repeatedPassword.value) {
+            alert("Password are not equal");
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
 

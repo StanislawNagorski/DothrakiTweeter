@@ -29,4 +29,11 @@ public interface AppUserDAO {
 
     void deleteUser(AppUser user);
 
+    void setLogin(AppUser appUser, String newLogin);
+    void setName(AppUser appUser, String newName);
+    void setLastName(AppUser appUser, String newLastName);
+    void setEmail(AppUser appUser, String newEmail);
+    void setPassword(AppUser appUser, String newPassword);
+    void setAvatar(AppUser appUser, String avatarPath);
+
 }
