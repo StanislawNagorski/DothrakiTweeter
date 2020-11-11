@@ -32,10 +32,10 @@
     <div class="my-3 p-3 bg-white rounded box-shadow">
 
         <c:if test="${errors != null}">
-                <div class="alert alert-warning">
-                    <strong>${errors.header}</strong> <br>
-                    <p>${errors.message}<p>
-                </div>
+            <div class="alert alert-warning">
+                <strong>${errors.header}</strong> <br>
+                <p>${errors.message}<p>
+            </div>
         </c:if>
 
         <h6 class="border-bottom border-gray pb-2 mb-0">Your account</h6>
@@ -65,7 +65,7 @@
                     <img src="<c:url value = "${user.avatar}"/>" alt=""
                          class="mr-2 rounded" width="32" height="32">
                 </strong>
-                <a href="#"><b>Change avatar </b></a>
+                <a href="profileEdit?editField=avatar&type=file"><b>Change avatar </b></a>
                 <br>
                 <br>
                 <a href=""><b>DELETE ACCOUNT </b></a>
@@ -75,34 +75,56 @@
 
         <br>
 
-        <c:if test="${editField != null}">
-        <form action="profileEdit" method="POST" onsubmit="return checkPasswordIdentity(this)">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <input name="${editField}" class="form-control" placeholder="Enter new ${editField}" type="${type}"
-                           required>
-                </div>
-            </div>
+    <c:if test="${editField != null}">
 
-            <c:if test="${editField.equals('password')}">
+        <c:if test="${!editField.equals('avatar')}">
+            <form action="profileEdit" method="POST" onsubmit="return checkPasswordIdentity(this)">
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                         </div>
-                        <input name="repeatedPassword" class="form-control" placeholder="Repeat password" type="password" required>
+                        <input name="${editField}" class="form-control" placeholder="Enter new ${editField}"
+                               type="${type}"
+                               required>
                     </div>
                 </div>
-            </c:if>
 
+                <c:if test="${editField.equals('password')}">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            </div>
+                            <input name="repeatedPassword" class="form-control" placeholder="Repeat password"
+                                   type="password" required>
+                        </div>
+                    </div>
+                </c:if>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block blue"> Confirm</button>
+                </div>
+            </form>
+        </c:if>
+
+        <c:if test="${editField.equals('avatar')}">
+
+        <form action="profileEdit" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input name="avatar" class="form-control" accept="image/*" type="file" required>
+                </div>
+            </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block blue"> Confirm</button>
             </div>
         </form>
         </c:if>
+
+    </c:if>
 
     </div>
 
