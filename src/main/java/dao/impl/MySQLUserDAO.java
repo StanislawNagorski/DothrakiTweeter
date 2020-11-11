@@ -102,6 +102,7 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     @Override
     public void deleteUser(AppUser user) {
         user.setActive(false);
+        hibernateUtil.save(user);
     }
 
     @Override

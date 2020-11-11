@@ -64,6 +64,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public void deactivate(AppUser user) {
+        appUserDAO.deleteUser(user);
+    }
+
+    @Override
     public boolean isLoginAndPasswordValid(String login, String hashedPassword) {
 
         Optional<AppUser> userByLogin = appUserDAO.getUserByLogin(login);
