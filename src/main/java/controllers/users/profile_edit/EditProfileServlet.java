@@ -62,7 +62,7 @@ public class EditProfileServlet extends HttpServlet {
         }
         if (req.getParameter(USER_PASSWORD) != null) {
             String newUserPassword = req.getParameter(USER_PASSWORD);
-            String hash = PasswordHasher.hash(newUserPassword);
+            String hash = PasswordHasher.hash(userLoginFromSession, newUserPassword);
             service.changePassword(user, hash);
         }
         if (req.getParameter(USER_LOGIN) != null) {

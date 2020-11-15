@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
         if (errors.isEmpty()) {
 
             String userPassword = req.getParameter(ServletUtils.USER_PASSWORD);
-            String hashedPassword = PasswordHasher.hash(userPassword);
+            String hashedPassword = PasswordHasher.hash(userLogin,userPassword);
 
             AppUser appUser = AppUser.UserBuilder
                     .getBuilder()
