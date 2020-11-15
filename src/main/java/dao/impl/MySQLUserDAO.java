@@ -62,7 +62,7 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
 
     @Override
     public HashSet<AppUser> getNotFollowed(AppUser loggedUser) {
-        Query query = em.createQuery("from AppUser u where u.login != :login");
+        Query query = em.createQuery("from AppUser u where u.login != :login and u.isActive = true ");
         query.setParameter("login", loggedUser.getLogin());
         HashSet<AppUser> appUsers = new HashSet<AppUser>(query.getResultList());
         appUsers.removeAll(loggedUser.getFollowing());
