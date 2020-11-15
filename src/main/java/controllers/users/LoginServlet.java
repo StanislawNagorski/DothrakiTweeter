@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
             userLogin = (String) req.getAttribute(ServletUtils.USER_LOGIN);
             hashedPassword = (String) req.getAttribute(ServletUtils.USER_PASSWORD);
         } else {
-            hashedPassword = PasswordHasher.hash(userPassword);
+            hashedPassword = PasswordHasher.hash(userLogin,userPassword);
         }
 
         List<ValidationError> validationErrors = userService.loginValidation(userLogin, hashedPassword);
