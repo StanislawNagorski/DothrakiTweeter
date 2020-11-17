@@ -82,7 +82,8 @@ public class EditProfileServlet extends HttpServlet {
             }
         }
 
-        if (!req.getParts().isEmpty()){
+        String contentType = req.getContentType();
+        if (!contentType.equals(NON_AVATAR_FORM_CODE)){
             changeUserAvatar(req, user);
         }
 
