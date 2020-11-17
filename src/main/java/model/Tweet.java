@@ -15,12 +15,15 @@ public class Tweet {
     @Column(length = 300)
     private String message;
 
+    private String translation;
+
     @Column(name = "published_at")
     @CreationTimestamp
     private Date publishedAt;
 
     @ManyToOne
     private AppUser author;
+
 
     public Tweet() {
     }
@@ -60,6 +63,14 @@ public class Tweet {
 
     public void setPublishedAt(Date publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    public String getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(String messageTranslation) {
+        this.translation = messageTranslation;
     }
 
     @Override
