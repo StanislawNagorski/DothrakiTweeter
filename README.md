@@ -37,5 +37,5 @@ What I have learned in this project:
 - Basic kanban methodology implemented into GitHub.
 - Password MD5 with Apache Commons Codec.
 - API connection and basic JSON work.
-- 
+- Bootstrap basics.
 
