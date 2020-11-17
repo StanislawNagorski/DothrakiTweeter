@@ -121,9 +121,11 @@
                                         <a class="dropdown-item" href="profileEdit?editField=name&type=text">Change
                                             name</a>
                                         <a class="dropdown-item" href="profileEdit?editField=surname&type=text">Change
-                                            lastname </a>
+                                            surname </a>
                                         <a class="dropdown-item" href="profileEdit?editField=email&type=email">Change
                                             email </a>
+                                        <a class="dropdown-item" href="profileEdit?editField=avatar&type=file">Change
+                                            avatar </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="profileEdit?editField=password&type=password">Change
                                             password</a>
@@ -140,6 +142,7 @@
 
                         <c:if test="${editField != null}">
                             <hr>
+
                             <c:if test="${!editField.equals('avatar')}">
                                 <form action="profileEdit" method="POST" onsubmit="return checkPasswordIdentity(this)">
                                     <div class="form-group">
