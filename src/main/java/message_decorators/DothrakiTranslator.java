@@ -47,7 +47,7 @@ public class DothrakiTranslator {
         return (String) contents.get(TRANSLATED_TEXT);
     }
 
-    public String getTranslation(String tweet){
+    public String translate(String tweet){
         String jsonStringFromHTTP;
         try {
             jsonStringFromHTTP = getTranslationJSONStringFromHTTP(tweet);

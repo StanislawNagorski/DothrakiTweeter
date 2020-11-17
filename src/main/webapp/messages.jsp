@@ -53,8 +53,12 @@ o        .blue {
                     </strong>
                     <strong class="d-block text-gray-dark"></strong>
                         ${tweet.message}
-                    </strong>
+                    <br><br>
+                    <i>Dothraki translation:</i>
                     <br>
+                    ${tweet.translation}
+                    </strong>
+                    <br><br>
                     <b>Published at : <fmt:formatDate value="${tweet.publishedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></b>
                 </p>
                 <c:if test="${tweet.author.login.equals(sessionScope.login)}">
