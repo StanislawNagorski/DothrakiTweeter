@@ -34,7 +34,7 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public void deleteTweet(AppUser author,Long tweetID) {
-        author.getTweets().remove(tweetDAO.getTweet(tweetID));
+        author.getTweets().remove(tweetDAO.getTweet(tweetID).get());
         tweetDAO.deleteTweet(tweetID);
     }
 }
