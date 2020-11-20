@@ -34,7 +34,7 @@
 
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <strong class="d-block text-gray-dark">
-                        ${tweet.author.login}
+                        <a href="profileEdit?login=${tweet.author.login}"> ${tweet.author.login} </a>
                     <br>
                 </strong>
                 <strong class="d-block text-gray-dark"></strong>

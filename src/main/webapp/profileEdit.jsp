@@ -111,8 +111,11 @@
                                 <p class="text-secondary mb-1">${user.login}</p>
                                 <p class="text-secondary mb-1">Followers: ${fn:length(user.followers)}</p>
 
-                                <button class="btn btn-primary">Follow</button>
+                                <c:if test="${!login.equals(user.login)}">
+                                <a class="btn btn-primary" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
+                                </c:if>
 
+                                <c:if test="${login.equals(user.login)}">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -138,6 +141,9 @@
 
                                     </div>
                                 </div>
+                                </c:if>
+
+
                             </div>
                         </div>
 

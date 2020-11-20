@@ -35,7 +35,9 @@
                 <img src="<c:url value = "${followedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
                      height="32">
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <strong class="d-block text-gray-dark">${followedUser.login}</strong>
+                    <strong class="d-block text-gray-dark">
+                        <a href="profileEdit?login=${followedUser.login}"> ${followedUser.login} </a>
+                    </strong>
                     <strong class="d-block text-gray-dark">${followedUser.name}</strong>
                     <strong class="d-block text-gray-dark">
                         On twitter since :
@@ -49,10 +51,12 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Others</h6>
         <c:forEach items="${notFollowedUsers}" var="notFollowedUser">
             <div class="media text-muted pt-3">
-                <img src="<c:url value = "${notFollowedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
+                <img src="<c:url value ="${notFollowedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
                      height="32">
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <strong class="d-block text-gray-dark">${notFollowedUser.login}</strong>
+                    <strong class="d-block text-gray-dark">
+                        <a href="profileEdit?login=${notFollowedUser.login}"> ${notFollowedUser.login} </a>
+                    </strong>
                     <strong class="d-block text-gray-dark">${notFollowedUser.name}</strong>
                     <strong class="d-block text-gray-dark">
                         On Twitter since :
@@ -67,10 +71,12 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Followers</h6>
         <c:forEach items="${followers}" var="followedUser">
             <div class="media text-muted pt-3">
-                <img src="<c:url value = "${followedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
+                <img src="<c:url value ="${followedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
                      height="32">
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    <strong class="d-block text-gray-dark">${followedUser.login}</strong>
+                    <strong class="d-block text-gray-dark">
+                        <a href="profileEdit?login=${followedUser.login}"> ${followedUser.login} </a>
+                    </strong>
                     <strong class="d-block text-gray-dark">${followedUser.name}</strong>
                     <strong class="d-block text-gray-dark">
                         On twitter since :
