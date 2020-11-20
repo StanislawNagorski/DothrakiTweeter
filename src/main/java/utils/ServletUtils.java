@@ -11,6 +11,7 @@ public class ServletUtils {
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "password";
     public static final String USER_EMAIL = "email";
+    public static final String USER_TWEETS = "tweets";
     public static final String REMEMBER = "remember";
     public static final String CHECKBOX_CHECKED = "on";
     public static final String LOGIN_ERROR_HEADER = "INVALID LOGIN";

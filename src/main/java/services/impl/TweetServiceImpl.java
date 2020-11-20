@@ -11,6 +11,7 @@ import java.util.List;
 public class TweetServiceImpl implements TweetService {
 
     TweetDAO tweetDAO;
+
     private final DothrakiTranslator translator = new DothrakiTranslator();
 
     public TweetServiceImpl(TweetDAO tweetDAO) {
@@ -25,14 +26,15 @@ public class TweetServiceImpl implements TweetService {
     @Override
     public void addTweet(AppUser author, String message) {
         Tweet tweet = new Tweet(author, message);
+        author.getTweets().add(tweet);
         tweet.setTranslation(translator.translate(message));
         tweetDAO.saveTweet(tweet);
     }
 
 
-
     @Override
-    public void deleteTweet(Long tweetID) {
+    public void deleteTweet(AppUser author,Long tweetID) {
+        author.getTweets().remove(tweetDAO.getTweet(tweetID));
         tweetDAO.deleteTweet(tweetID);
     }
 }

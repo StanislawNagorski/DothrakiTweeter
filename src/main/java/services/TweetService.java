@@ -9,6 +9,5 @@ public interface TweetService {
 
     List<Tweet> getUserTweets(AppUser user);
     void addTweet(AppUser author, String message);
-    void deleteTweet(Long tweetId);
-
+    void deleteTweet(AppUser author, Long tweetID);
 }

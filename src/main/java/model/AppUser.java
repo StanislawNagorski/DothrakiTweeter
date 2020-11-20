@@ -126,6 +126,14 @@ public class AppUser {
         this.registeredSince = registeredSince;
     }
 
+    public Set<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(Set<Tweet> tweets) {
+        this.tweets = tweets;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,8 +1,12 @@
 package controllers.messages;
 
 import dao.impl.MySQLTwitterDAO;
+import dao.impl.MySQLUserDAO;
+import model.AppUser;
 import org.apache.commons.codec.digest.DigestUtils;
+import services.AppUserService;
 import services.TweetService;
+import services.impl.AppUserServiceImpl;
 import services.impl.TweetServiceImpl;
 import utils.ServletUtils;
 
@@ -17,16 +21,21 @@ import java.io.IOException;
 public class DeleteTweetServlet extends HttpServlet {
 
     TweetService tweetService;
+    AppUserService appUserService;
 
     @Override
     public void init() throws ServletException {
         tweetService = new TweetServiceImpl(new MySQLTwitterDAO());
+        appUserService = new AppUserServiceImpl(new MySQLUserDAO());
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long tweetIdFromParameter = ServletUtils.getTweetIdFromParameter(req);
-        tweetService.deleteTweet(tweetIdFromParameter);
+        AppUser user = appUserService.getUserByLogin(ServletUtils.getUserLoginFromSession(req));
+
+        tweetService.deleteTweet(user,tweetIdFromParameter);
         req.getRequestDispatcher("messages").forward(req,resp);
     }
 

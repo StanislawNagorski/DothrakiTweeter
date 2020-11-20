@@ -209,6 +209,15 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
+                                <h6 class="mb-0">Login</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                ${user.login}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
                                 <h6 class="mb-0">Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
@@ -245,8 +254,12 @@
 
                     </div>
                 </div>
-            </div>
+                <%--            MESSAGES SECTION--%>
+                <div class="col-mb-3">
+                    <%@include file="onlyTweets.jsp" %>
+                </div>
 
+            </div>
 
 
 
