@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <title>Edit profile</title>
@@ -107,6 +109,7 @@
                             <div class="mt-3">
                                 <h4> ${user.name} ${user.lastName} </h4>
                                 <p class="text-secondary mb-1">${user.login}</p>
+                                <p class="text-secondary mb-1">Followers: ${fn:length(user.followers)}</p>
 
                                 <button class="btn btn-primary">Follow</button>
 
