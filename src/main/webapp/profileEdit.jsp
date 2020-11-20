@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <title>Edit profile</title>
@@ -107,6 +109,7 @@
                             <div class="mt-3">
                                 <h4> ${user.name} ${user.lastName} </h4>
                                 <p class="text-secondary mb-1">${user.login}</p>
+                                <p class="text-secondary mb-1">Followers: ${fn:length(user.followers)}</p>
 
                                 <button class="btn btn-primary">Follow</button>
 
@@ -209,6 +212,15 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
+                                <h6 class="mb-0">Login</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                ${user.login}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
                                 <h6 class="mb-0">Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
@@ -245,8 +257,12 @@
 
                     </div>
                 </div>
-            </div>
+                <%--            MESSAGES SECTION--%>
+                <div class="col-mb-3">
+                    <%@include file="onlyTweets.jsp" %>
+                </div>
 
+            </div>
 
 
 

@@ -1,11 +1,15 @@
 package controllers.users.profile_edit;
 
+import dao.impl.MySQLTwitterDAO;
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
 import model.AppUser;
+import model.Tweet;
 import security.PasswordHasher;
 import services.AppUserService;
+import services.TweetService;
 import services.impl.AppUserServiceImpl;
+import services.impl.TweetServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,6 +21,7 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import static utils.ServletUtils.*;
@@ -28,10 +33,12 @@ import static utils.ServletUtils.*;
 public class EditProfileServlet extends HttpServlet {
 
     AppUserService service;
+    TweetService tweetService;
 
     @Override
     public void init() throws ServletException {
         service = new AppUserServiceImpl(new MySQLUserDAO());
+        tweetService = new TweetServiceImpl(new MySQLTwitterDAO());
     }
 
     @Override
@@ -124,12 +131,18 @@ public class EditProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userLoginFromSession = getUserLoginFromSession(req);
         AppUser user = service.getUserByLogin(userLoginFromSession);
+        System.out.println("login z sesji to: " + user.getLogin());
+        System.out.println("twwet servie z sesji to: " + tweetService.getClass().descriptorString());
 
-        String whatChange = req.getParameter(PROFILE_EDIT);
+
+        String fieldToChange = req.getParameter(PROFILE_EDIT);
         String typeOfFieldToChange = req.getParameter(PROFILE_EDIT_TYPE);
 
+        List<Tweet> userTweets = tweetService.getUserTweets(user);
+        req.setAttribute(USER_TWEETS, userTweets);
+
         req.setAttribute(PROFILE_EDIT_TYPE, typeOfFieldToChange);
-        req.setAttribute(PROFILE_EDIT, whatChange);
+        req.setAttribute(PROFILE_EDIT, fieldToChange);
         req.setAttribute(USER, user);
         req.getRequestDispatcher("/profileEdit.jsp").forward(req, resp);
 

@@ -1,5 +1,5 @@
 
-Class time => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki.svg)](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki)
+Class time =>n n[![time tracker](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki.svg)](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki)
 
 My addons => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter.svg)](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter)
 
