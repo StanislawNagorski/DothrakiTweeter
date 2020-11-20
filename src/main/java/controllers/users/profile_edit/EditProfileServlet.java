@@ -129,8 +129,17 @@ public class EditProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userLoginFromSession = getUserLoginFromSession(req);
-        AppUser user = service.getUserByLogin(userLoginFromSession);
+
+        AppUser user;
+
+        if (req.getParameter(USER_LOGIN) != null){
+            String userLoginFromParameter = req.getParameter(USER_LOGIN);
+            user = service.getUserByLogin(userLoginFromParameter);
+        } else {
+            String userLoginFromSession = getUserLoginFromSession(req);
+            user = service.getUserByLogin(userLoginFromSession);
+        }
+
 
         String fieldToChange = req.getParameter(PROFILE_EDIT);
         String typeOfFieldToChange = req.getParameter(PROFILE_EDIT_TYPE);

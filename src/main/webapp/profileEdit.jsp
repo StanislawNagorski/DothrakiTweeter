@@ -113,6 +113,7 @@
 
                                 <button class="btn btn-primary">Follow</button>
 
+                                <c:if test="${login.equals(user.login)}">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -138,6 +139,9 @@
 
                                     </div>
                                 </div>
+                                </c:if>
+
+
                             </div>
                         </div>
 
