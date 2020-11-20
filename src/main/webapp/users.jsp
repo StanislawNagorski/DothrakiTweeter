@@ -55,7 +55,7 @@
                      height="32">
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
-                        <a href="profileEdit?login= ${notFollowedUser.login}"> ${notFollowedUser.login} </a>
+                        <a href="profileEdit?login=${notFollowedUser.login}"> ${notFollowedUser.login} </a>
                     </strong>
                     <strong class="d-block text-gray-dark">${notFollowedUser.name}</strong>
                     <strong class="d-block text-gray-dark">
@@ -75,7 +75,7 @@
                      height="32">
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
-                        <a href="profileEdit?login= ${followedUser.login}"> ${followedUser.login} </a>
+                        <a href="profileEdit?login=${followedUser.login}"> ${followedUser.login} </a>
                     </strong>
                     <strong class="d-block text-gray-dark">${followedUser.name}</strong>
                     <strong class="d-block text-gray-dark">
