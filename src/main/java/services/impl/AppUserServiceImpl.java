@@ -116,11 +116,6 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public Long numberOfFollowers(AppUser loggedUser) {
-        return appUserDAO.numberOfFollowers(loggedUser);
-    }
-
-    @Override
     public HashSet<AppUser> getNotFollowed(AppUser loggedUSer) {
         return appUserDAO.getNotFollowed(loggedUSer);
     }

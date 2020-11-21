@@ -93,12 +93,6 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         return resultList.stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
     }
 
-    @Override
-    public Long numberOfFollowers(AppUser loggedUser) {
-        Query query = em.createQuery("select COUNT(*) from AppUser u where u.id = :userID ");
-        query.setParameter("userID", loggedUser.getId());
-        return (Long) query.getSingleResult();
-    }
 
 
     @Override
