@@ -111,6 +111,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public HashSet<AppUser> getFollowers(AppUser loggedUser, int offset, int limit) {
+        return appUserDAO.getFollowers(loggedUser, offset,limit);
+    }
+
+    @Override
     public HashSet<AppUser> getNotFollowed(AppUser loggedUSer) {
         return appUserDAO.getNotFollowed(loggedUSer);
     }

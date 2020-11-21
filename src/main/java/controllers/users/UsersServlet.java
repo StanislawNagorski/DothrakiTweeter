@@ -4,7 +4,6 @@ import dao.impl.MySQLUserDAO;
 import model.AppUser;
 import services.AppUserService;
 import services.impl.AppUserServiceImpl;
-import utils.ServletUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +14,8 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.stream.Collectors;
+
+import static utils.ServletUtils.*;
 
 @WebServlet (name = "Users", value = "/users")
 public class UsersServlet extends HttpServlet {
@@ -33,7 +34,7 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userLogin = ServletUtils.getUserLoginFromSession(req);
+        String userLogin = getUserLoginFromSession(req);
 
         AppUser user = service.getUserByLogin(userLogin);
         HashSet<AppUser> followedUsers = service.getFollowedUsers(user);
@@ -43,11 +44,19 @@ public class UsersServlet extends HttpServlet {
                 .limit(5)
                 .collect(Collectors.toCollection(HashSet::new));
 
-        HashSet<AppUser> followers = service.getFollowers(user);
+        HashSet<AppUser> followers;
+        if (req.getParameter(FOLLOWERS_LIMIT) != null && req.getParameter(FOLLOWERS_OFFSET) != null) {
+            int limit = Integer.parseInt(req.getParameter(FOLLOWERS_LIMIT));
+            int offset = Integer.parseInt(req.getParameter(FOLLOWERS_OFFSET));
 
-        req.setAttribute(ServletUtils.FOLLOWED_USERS, followedUsers);
-        req.setAttribute(ServletUtils.NOT_FOLLOWED_USERS, notFollowed);
-        req.setAttribute(ServletUtils.FOLLOWERS, followers);
+            followers = service.getFollowers(user, offset, limit);
+        } else {
+            followers = service.getFollowers(user, 0, 5);
+        }
+
+        req.setAttribute(FOLLOWED_USERS, followedUsers);
+        req.setAttribute(NOT_FOLLOWED_USERS, notFollowed);
+        req.setAttribute(FOLLOWERS, followers);
 
         req.getRequestDispatcher("/users.jsp").forward(req, resp);
 

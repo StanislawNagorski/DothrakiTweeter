@@ -62,7 +62,8 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
 
     @Override
     public HashSet<AppUser> getNotFollowed(AppUser loggedUser) {
-        Query query = em.createQuery("from AppUser u where u.login != :login and u.isActive = true ");
+        Query query = em.createQuery(
+                "from AppUser u where u.login != :login and u.isActive = true ");
         query.setParameter("login", loggedUser.getLogin());
         HashSet<AppUser> appUsers = new HashSet<AppUser>(query.getResultList());
         appUsers.removeAll(loggedUser.getFollowing());
@@ -75,6 +76,18 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     public HashSet<AppUser> getFollowers(AppUser loggedUser) {
         Query query = em.createQuery("select followers from AppUser u where u.id = :userID");
         query.setParameter("userID", loggedUser.getId());
+        ArrayList<AppUser> resultList = new ArrayList<>(query.getResultList());
+
+        return resultList.stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
+    }
+
+    @Override
+    public HashSet<AppUser> getFollowers(AppUser loggedUser, int offset, int limit) {
+        Query query = em.createQuery("select followers from AppUser u " +
+                "where u.id = :userID");
+        query.setParameter("userID", loggedUser.getId());
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
         ArrayList<AppUser> resultList = new ArrayList<>(query.getResultList());
 
         return resultList.stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
@@ -139,10 +152,6 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     public void setAvatar(AppUser appUser, String avatarPath) {
         appUser.setAvatar(avatarPath);
         hibernateUtil.save(appUser);
-    }
-
-    private void unfollowBeforeDelete(AppUser user) {
-        getFollowers(user).forEach(following -> unfollow(following, user));
     }
 
 }
