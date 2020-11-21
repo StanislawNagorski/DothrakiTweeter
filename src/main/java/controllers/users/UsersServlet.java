@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @WebServlet (name = "Users", value = "/users")
 public class UsersServlet extends HttpServlet {
@@ -35,7 +37,12 @@ public class UsersServlet extends HttpServlet {
 
         AppUser user = service.getUserByLogin(userLogin);
         HashSet<AppUser> followedUsers = service.getFollowedUsers(user);
-        HashSet<AppUser> notFollowed = service.getNotFollowed(user);
+        HashSet<AppUser> notFollowed = service.getNotFollowed(user)
+                .stream()
+                .sorted(Comparator.comparingInt(o -> o.getFollowers().size()))
+                .limit(5)
+                .collect(Collectors.toCollection(HashSet::new));
+
         HashSet<AppUser> followers = service.getFollowers(user);
 
         req.setAttribute(ServletUtils.FOLLOWED_USERS, followedUsers);
