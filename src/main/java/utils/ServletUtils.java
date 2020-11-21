@@ -41,6 +41,8 @@ public class ServletUtils {
     public static final String FOLLOWERS_OFFSET = "followers_offset";
     public static final String FOLLOWING_LIMIT ="following_limit";
     public static final String FOLLOWING_OFFSET = "following_offset";
+    public static final int DEFAULT_OFFSET = 0;
+    public static final int DEFAULT_LIMIT = 3;
 
 
     public static String getUserLoginFromSession(HttpServletRequest req) {

@@ -45,13 +45,11 @@ public class UsersServlet extends HttpServlet {
                 .collect(Collectors.toCollection(HashSet::new));
 
         HashSet<AppUser> followers;
-        if (req.getParameter(FOLLOWERS_LIMIT) != null && req.getParameter(FOLLOWERS_OFFSET) != null) {
-            int limit = Integer.parseInt(req.getParameter(FOLLOWERS_LIMIT));
+        if (req.getParameter(FOLLOWERS_OFFSET) != null) {
             int offset = Integer.parseInt(req.getParameter(FOLLOWERS_OFFSET));
-
-            followers = service.getFollowers(user, offset, limit);
+            followers = service.getFollowers(user, offset, DEFAULT_LIMIT);
         } else {
-            followers = service.getFollowers(user, 0, 5);
+            followers = service.getFollowers(user, DEFAULT_OFFSET, DEFAULT_LIMIT);
         }
 
         req.setAttribute(FOLLOWED_USERS, followedUsers);
