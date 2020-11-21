@@ -47,6 +47,8 @@ public class UsersServlet extends HttpServlet {
         HashSet<AppUser> followers;
         if (req.getParameter(FOLLOWERS_OFFSET) != null) {
             int offset = Integer.parseInt(req.getParameter(FOLLOWERS_OFFSET));
+            int numberOfFollowers = service.numberOfFollowers(user);
+            //TODO odpowiedź: https://stackoverflow.com/questions/31410007/how-to-do-pagination-in-jsp
             followers = service.getFollowers(user, offset, DEFAULT_LIMIT);
         } else {
             followers = service.getFollowers(user, DEFAULT_OFFSET, DEFAULT_LIMIT);

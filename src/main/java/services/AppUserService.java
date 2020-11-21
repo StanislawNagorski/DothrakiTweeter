@@ -18,6 +18,7 @@ public interface AppUserService {
     AppUser getUserByLogin(String login);
     HashSet<AppUser> getFollowers(AppUser loggedUser);
     HashSet<AppUser> getFollowers(AppUser loggedUser, int offset, int limit);
+    int numberOfFollowers(AppUser loggedUser);
     HashSet<AppUser> getNotFollowed(AppUser loggedUSer);
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser);
     void followUser(AppUser loggedUser, AppUser userToFollow);
