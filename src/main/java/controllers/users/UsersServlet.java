@@ -45,19 +45,21 @@ public class UsersServlet extends HttpServlet {
                 .collect(Collectors.toCollection(HashSet::new));
 
         HashSet<AppUser> followers;
+        int numberOfFollowers = service.getFollowers(user).size();
+        int numberOfPages = (int) Math.ceil(numberOfFollowers / DEFAULT_LIMIT);
+
         if (req.getParameter(FOLLOWERS_CURRENT_PAGE) != null) {
             int page = Integer.parseInt(req.getParameter(FOLLOWERS_CURRENT_PAGE));
             if (page <= 0){page = 0;}
+            if (page > numberOfFollowers) {page = numberOfPages-1;}
             followers = service.getFollowers(user, (page*DEFAULT_LIMIT), DEFAULT_LIMIT);
             req.setAttribute(FOLLOWERS_CURRENT_PAGE, page);
 
         } else {
             followers = service.getFollowers(user, DEFAULT_OFFSET, DEFAULT_LIMIT);
         }
-
-        int numberOfFollowers = service.getFollowers(user).size();
-        int numberOfPages = (int) Math.ceil(numberOfFollowers / DEFAULT_LIMIT);
         req.setAttribute(FOLLOWERS_NUMBER_OF_PAGES, numberOfPages);
+
 
         req.setAttribute(FOLLOWED_USERS, followedUsers);
         req.setAttribute(NOT_FOLLOWED_USERS, notFollowed);

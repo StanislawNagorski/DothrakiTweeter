@@ -103,9 +103,6 @@
                     <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${i}#followers">${i+1}</a></li>
                 </c:forEach>
 
-                <%--                <li class="page-item"><a class="page-link" href="users?followers_offset=3#followers">1</a></li>--%>
-                <%--                <li class="page-item"><a class="page-link" href="users?followers_offset=6#followers">2</a></li>--%>
-                <%--                <li class="page-item"><a class="page-link" href="users?followers_offset=9#followers">3</a></li>--%>
 
                 <li class="page-item"><a class="page-link"
                                          href="users?followersCurrentPage=${followersCurrentPage + 1}#followers">Next</a>
