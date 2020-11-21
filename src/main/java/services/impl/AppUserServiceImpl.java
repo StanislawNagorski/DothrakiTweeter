@@ -116,7 +116,7 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public int numberOfFollowers(AppUser loggedUser) {
+    public Long numberOfFollowers(AppUser loggedUser) {
         return appUserDAO.numberOfFollowers(loggedUser);
     }
 

@@ -37,10 +37,8 @@ public class ServletUtils {
     public static final String TYPE_TEXT = "text";
     public static final String UPLOAD_DIRECTORY = "resources" + File.separator + "img";
     public static final String NON_AVATAR_FORM_CODE = "application/x-www-form-urlencoded";
-    public static final String FOLLOWERS_LIMIT ="followers_limit";
-    public static final String FOLLOWERS_OFFSET = "followers_offset";
-    public static final String FOLLOWING_LIMIT ="following_limit";
-    public static final String FOLLOWING_OFFSET = "following_offset";
+    public static final String FOLLOWERS_PAGE = "followers_page";
+    public static final String FOLLOWING_PAGE = "following_page";
     public static final int DEFAULT_OFFSET = 0;
     public static final int DEFAULT_LIMIT = 3;
 

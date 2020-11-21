@@ -19,7 +19,7 @@ public interface AppUserDAO {
 
     HashSet<AppUser> getFollowers(AppUser loggedUser);
     HashSet<AppUser> getFollowers(AppUser loggedUser,  int offset, int limit);
-    int numberOfFollowers(AppUser loggedUser);
+    Long numberOfFollowers(AppUser loggedUser);
 
     HashSet<AppUser> getNotFollowed(AppUser loggedUSer);
 

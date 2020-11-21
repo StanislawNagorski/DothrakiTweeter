@@ -94,10 +94,10 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     }
 
     @Override
-    public int numberOfFollowers(AppUser loggedUser) {
+    public Long numberOfFollowers(AppUser loggedUser) {
         Query query = em.createQuery("select COUNT(*) from AppUser u where u.id = :userID ");
         query.setParameter("userID", loggedUser.getId());
-        return (int) query.getSingleResult();
+        return (Long) query.getSingleResult();
     }
 
 
