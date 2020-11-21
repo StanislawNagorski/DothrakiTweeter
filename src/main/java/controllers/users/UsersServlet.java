@@ -51,7 +51,7 @@ public class UsersServlet extends HttpServlet {
         if (req.getParameter(FOLLOWERS_CURRENT_PAGE) != null) {
             int page = Integer.parseInt(req.getParameter(FOLLOWERS_CURRENT_PAGE));
             if (page <= 0){page = 0;}
-            if (page > numberOfFollowers) {page = numberOfPages-1;}
+            if (page > numberOfPages) {page = numberOfPages-1;}
             followers = service.getFollowers(user, (page*DEFAULT_LIMIT), DEFAULT_LIMIT);
             req.setAttribute(FOLLOWERS_CURRENT_PAGE, page);
 
