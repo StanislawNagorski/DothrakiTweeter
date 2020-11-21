@@ -145,6 +145,7 @@ public class EditProfileServlet extends HttpServlet {
         String typeOfFieldToChange = req.getParameter(PROFILE_EDIT_TYPE);
 
         List<Tweet> userTweets = tweetService.getUserTweets(user);
+        userTweets.sort((o1, o2) -> o2.getPublishedAt().compareTo(o1.getPublishedAt()));
         req.setAttribute(USER_TWEETS, userTweets);
 
         req.setAttribute(PROFILE_EDIT_TYPE, typeOfFieldToChange);
