@@ -45,11 +45,14 @@ public class UsersServlet extends HttpServlet {
                 .collect(Collectors.toCollection(HashSet::new));
 
         HashSet<AppUser> followers;
-        if (req.getParameter(FOLLOWERS_PAGE) != null) {
-            int page = Integer.parseInt(req.getParameter(FOLLOWERS_PAGE));
+        if (req.getParameter(FOLLOWERS_CURRENT_PAGE) != null) {
+            int page = Integer.parseInt(req.getParameter(FOLLOWERS_CURRENT_PAGE));
             Long numberOfFollowers = service.numberOfFollowers(user);
+            int numberOfPages = (int) Math.ceil(numberOfFollowers / DEFAULT_LIMIT);
             //TODO odpowiedź: https://stackoverflow.com/questions/31410007/how-to-do-pagination-in-jsp
             followers = service.getFollowers(user, (page*DEFAULT_LIMIT), DEFAULT_LIMIT);
+            req.setAttribute(FOLLOWERS_CURRENT_PAGE, page);
+            req.setAttribute(FOLLOWERS_NUMBER_OF_PAGES, numberOfPages);
         } else {
             followers = service.getFollowers(user, DEFAULT_OFFSET, DEFAULT_LIMIT);
         }

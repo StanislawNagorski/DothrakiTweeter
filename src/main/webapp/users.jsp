@@ -94,11 +94,11 @@
 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage - 1}#followers">Previous</a></li>
                 <li class="page-item"><a class="page-link" href="users?followers_offset=3#followers">1</a></li>
                 <li class="page-item"><a class="page-link" href="users?followers_offset=6#followers">2</a></li>
                 <li class="page-item"><a class="page-link" href="users?followers_offset=9#followers">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage + 1}#followers">Next</a></li>
             </ul>
         </nav>
 
