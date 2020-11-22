@@ -13,14 +13,16 @@ This app is to help you with language learning! (but if you need to improve your
 
 About project:
 -
-This project was created during classes with SDA, to learn jsp technology. 
+This project were created during classes with SDA, to learn jsp technology. 
 I decided to develop it further, to get a better understanding of technology stack 
 and just to play with it a little :)
 - What I added to project:
 - password hashing,
 - dothraki translation, 
-- "edit-profile" page,
+- profile page,
+- profile edit,
 - avatars integrations,
+- pagination of users, and TopToFollow.
 
 Technology stack:
 -
@@ -29,7 +31,8 @@ Technology stack:
 - JPA and MySQL,
 - build with Maven,
 - Dothraki API,
-- MD5 hash.
+- MD5 hash,
+- HTML, Bootstrap 4.0
 
 What I have learned in this project:
 -

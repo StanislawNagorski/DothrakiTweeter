@@ -57,18 +57,28 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
 
     @Override
     public HashSet<AppUser> getFollowedUsers(AppUser loggedUser) {
-        return new HashSet<>(loggedUser.getFollowing());
+        return loggedUser.getFollowing().stream()
+                .filter(AppUser::isActive)
+                .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    @Override
+    public HashSet<AppUser> getFollowedUsers(AppUser loggedUser, int offset, int limit) {
+        return loggedUser.getFollowing().stream()
+                .skip(offset)
+                .limit(limit)
+                .filter(AppUser::isActive)
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
     @Override
     public HashSet<AppUser> getNotFollowed(AppUser loggedUser) {
-        Query query = em.createQuery("from AppUser u where u.login != :login and u.isActive = true ");
+        Query query = em.createQuery(
+                "from AppUser u where u.login != :login and u.isActive = true ");
         query.setParameter("login", loggedUser.getLogin());
         HashSet<AppUser> appUsers = new HashSet<AppUser>(query.getResultList());
         appUsers.removeAll(loggedUser.getFollowing());
         return appUsers;
-
-        //TODO do przepsania w hibarnate tak aby nie pobierać całej listy
     }
 
     @Override
@@ -79,6 +89,19 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
 
         return resultList.stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
     }
+
+    @Override
+    public HashSet<AppUser> getFollowers(AppUser loggedUser, int offset, int limit) {
+        Query query = em.createQuery("select followers from AppUser u " +
+                "where u.id = :userID");
+        query.setParameter("userID", loggedUser.getId());
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        ArrayList<AppUser> resultList = new ArrayList<>(query.getResultList());
+
+        return resultList.stream().filter(AppUser::isActive).collect(Collectors.toCollection(HashSet::new));
+    }
+
 
 
     @Override
@@ -139,10 +162,6 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     public void setAvatar(AppUser appUser, String avatarPath) {
         appUser.setAvatar(avatarPath);
         hibernateUtil.save(appUser);
-    }
-
-    private void unfollowBeforeDelete(AppUser user) {
-        getFollowers(user).forEach(following -> unfollow(following, user));
     }
 
 }
