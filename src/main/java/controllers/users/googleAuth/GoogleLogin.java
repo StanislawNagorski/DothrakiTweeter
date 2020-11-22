@@ -44,7 +44,7 @@ public class GoogleLogin extends HttpServlet {
             String familyName = (String) payLoad.get("family_name");
             String email = payLoad.getEmail();
             String image = (String) payLoad.get("picture");
-            System.out.println(image);
+
             //String login = PasswordHasher.hash(name, email);
             String login = fullName;
 
