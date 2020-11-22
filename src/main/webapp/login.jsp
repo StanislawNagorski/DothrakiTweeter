@@ -59,6 +59,7 @@
             </div>
             <p class="text-center"><a href="register" class="btn">Sign up</a></p>
         </form>
+
         <%@include file="googleLogin.jsp" %>
     </div>
 </main>

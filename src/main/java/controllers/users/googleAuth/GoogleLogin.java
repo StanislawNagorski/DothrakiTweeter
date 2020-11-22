@@ -4,6 +4,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
 import model.AppUser;
+import security.LoginBuilderForGoogle;
 import security.PasswordHasher;
 import services.AppUserService;
 import services.impl.AppUserServiceImpl;
@@ -21,7 +22,7 @@ import java.util.Optional;
 
 import static utils.ServletUtils.*;
 
-@WebServlet (name ="GoogleLogin", urlPatterns = "/googleLogin")
+@WebServlet(name = "GoogleLogin", urlPatterns = "/googleLogin")
 public class GoogleLogin extends HttpServlet {
     AppUserService service;
 
@@ -34,32 +35,35 @@ public class GoogleLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
 
-
-
+        String idToken = req.getParameter("id_token");
+        GoogleIdToken.Payload payLoad = null;
         try {
-            String idToken = req.getParameter("id_token");
-            GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
-            String fullName = (String) payLoad.get("name");
-            String name = (String) payLoad.get("given_name");
-            String familyName = (String) payLoad.get("family_name");
-            String email = payLoad.getEmail();
-            String image = (String) payLoad.get("picture");
+            payLoad = IdTokenVerifierAndParser.getPayload(idToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            //String login = PasswordHasher.hash(name, email);
-            String login = fullName;
+        String fullName = (String) payLoad.get("name");
+        String name = (String) payLoad.get("given_name");
+        String familyName = (String) payLoad.get("family_name");
+        String email = payLoad.getEmail();
+        String image = (String) payLoad.get("picture");
 
-            Optional<ValidationError> validationError = service.validateLogin(login);
-            boolean userIsNotInDataBase = validationError.isEmpty();
-            if (userIsNotInDataBase){
-                AppUser userFromGoogle = AppUser.UserBuilder.getBuilder()
-                        .login(login)
-                        .name(name)
-                        .lastName(familyName)
-                        .email(email)
-                        .avatar(image)
-                        .build();
-                service.register(userFromGoogle);
-            }
+        String login = LoginBuilderForGoogle.build(name, email);
+
+        Optional<ValidationError> validationError = service.validateLogin(login);
+
+        boolean userIsNotInDataBase = validationError.isEmpty();
+        if (userIsNotInDataBase) {
+            AppUser userFromGoogle = AppUser.UserBuilder.getBuilder()
+                    .login(login)
+                    .name(name)
+                    .lastName(familyName)
+                    .email(email)
+                    .avatar(image)
+                    .build();
+            service.register(userFromGoogle);
+        }
 
 //            List<ValidationError> errors = service.validateUser(login, email);
 //            if (!errors.isEmpty()){
@@ -67,17 +71,15 @@ public class GoogleLogin extends HttpServlet {
 //                req.getRequestDispatcher("/login.jsp").forward(req, resp);
 //            }
 
-            req.getSession().setAttribute(USER_LOGIN, fullName);
-            req.getSession().setAttribute(USER_AVATAR, image);
-            req.getRequestDispatcher("users").forward(req, resp);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        req.getSession().setAttribute(USER_LOGIN, login);
+        req.getSession().setAttribute(USER_AVATAR, image);
+        req.getRequestDispatcher("users").forward(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
+
+
 }
