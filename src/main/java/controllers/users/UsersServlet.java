@@ -41,7 +41,7 @@ public class UsersServlet extends HttpServlet {
 
         HashSet<AppUser> notFollowed = service.getNotFollowed(user)
                 .stream()
-                .sorted(Comparator.comparingInt(o -> o.getFollowers().size()))
+                .sorted((o1, o2) -> o2.getFollowers().size()-o1.getFollowers().size())
                 .limit(DEFAULT_TOP_USERS_TO_FOLLOW)
                 .collect(Collectors.toCollection(HashSet::new));
 
