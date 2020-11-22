@@ -167,6 +167,7 @@ public class AppUser {
         private String login;
         private String password;
         private String email;
+        private String avatar;
 
         public static UserBuilder getBuilder() {
             return new UserBuilder();
@@ -197,6 +198,11 @@ public class AppUser {
             return this;
         }
 
+        public UserBuilder avatar(String avatar) {
+            this.avatar = avatar;
+            return this;
+        }
+
         public AppUser build() {
             AppUser user = new AppUser();
             user.setLogin(this.login);
@@ -204,6 +210,7 @@ public class AppUser {
             user.setName(this.name);
             user.setLastName(this.lastName);
             user.setEmail(this.email);
+            user.setAvatar(this.avatar);
             user.setActive(true);
             return user;
         }
