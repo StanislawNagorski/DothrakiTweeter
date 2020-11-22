@@ -39,11 +39,9 @@ public class ServletUtils {
     public static final String NON_AVATAR_FORM_CODE = "application/x-www-form-urlencoded";
     public static final String FOLLOWERS_NUMBER_OF_PAGES = "followersTotalPages";
     public static final String FOLLOWERS_CURRENT_PAGE = "followersCurrentPage";
+    public static final String FOLLOWING_NUMBER_OF_PAGES = "followingTotalPages";
+    public static final String FOLLOWING_CURRENT_PAGE = "followingCurrentPage";
 
-
-    public static final String FOLLOWING_PAGE = "following_page";
-    public static final int DEFAULT_OFFSET = 0;
-    public static final int DEFAULT_LIMIT = 3;
 
 
     public static String getUserLoginFromSession(HttpServletRequest req) {

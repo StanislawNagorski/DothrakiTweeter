@@ -17,7 +17,7 @@ import static utils.ServletUtils.*;
 
 public class AppUserServiceImpl implements AppUserService {
 
-    private AppUserDAO appUserDAO;
+    private final AppUserDAO appUserDAO;
 
     public AppUserServiceImpl(AppUserDAO appUserDAO) {
         this.appUserDAO = appUserDAO;
@@ -123,6 +123,11 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public HashSet<AppUser> getFollowedUsers(AppUser loggedUser) {
         return appUserDAO.getFollowedUsers(loggedUser);
+    }
+
+    @Override
+    public HashSet<AppUser> getFollowedUsers(AppUser loggedUser, int offset, int limit) {
+        return appUserDAO.getFollowedUsers(loggedUser,offset,limit);
     }
 
     @Override

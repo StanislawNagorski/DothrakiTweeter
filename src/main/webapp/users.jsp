@@ -28,8 +28,9 @@
 
     <%@include file="header.jsp" %>
 
+    <%--   TOP TO FOLLOW SECTION--%>
     <div class="my-3 p-3 bg-white rounded box-shadow">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Top 5 Users to follow</h6>
+        <h6 class="border-bottom border-gray pb-2 mb-0">Top Users to follow</h6>
         <c:forEach items="${notFollowedUsers}" var="notFollowedUser">
             <div class="media text-muted pt-3">
                 <img src="<c:url value ="${notFollowedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
@@ -50,7 +51,9 @@
         </c:forEach>
     </div>
 
-    <div class="my-3 p-3 bg-white rounded box-shadow">
+
+    <%--    FOLLOWING SECTION SECTION--%>
+    <div id="following" class="my-3 p-3 bg-white rounded box-shadow">
         <h6 class="border-bottom border-gray pb-2 mb-0">Users which You follow:</h6>
         <c:forEach items="${followedUsers}" var="followedUser">
             <div class="media text-muted pt-3">
@@ -71,7 +74,21 @@
             </div>
         </c:forEach>
 
+        <br>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${followingCurrentPage - 1}#following">Previous</a></li>
+
+<%--                <c:forEach begin="0" end="${followingTotalPages}" var="i">--%>
+<%--                    <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${i}#following">${i+1}</a></li>--%>
+<%--                </c:forEach>--%>
+
+                <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${followingCurrentPage + 1}#following">Next</a></li>
+            </ul>
+        </nav>
     </div>
+
+<%--    FOLLOWER SECTION--%>
     <div id="followers" class="my-3 p-3 bg-white rounded box-shadow">
         <h6 class="border-bottom border-gray pb-2 mb-0">Your followers:</h6>
         <c:forEach items="${followers}" var="follower">
@@ -92,20 +109,19 @@
             </div>
         </c:forEach>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
+        <br>
+        <nav aria-label="Page navigation">
 
-                <li class="page-item"><a class="page-link"
-                                         href="users?followersCurrentPage=${followersCurrentPage - 1}#followers">Previous</a>
-                </li>
+            <ul class="pagination justify-content-center">
 
-                <c:forEach begin="0" end="${followersTotalPages}" var="i">
-                    <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${i}#followers">${i+1}</a></li>
-                </c:forEach>
+                <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage - 1}#followers">Previous</a></li>
+
+<%--                <c:forEach begin="0" end="${followersTotalPages}" var="i">--%>
+<%--                    <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${i}#followers">${i+1}</a></li>--%>
+<%--                </c:forEach>--%>
 
 
-                <li class="page-item"><a class="page-link"
-                                         href="users?followersCurrentPage=${followersCurrentPage + 1}#followers">Next</a>
+                <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage + 1}#followers">Next</a>
                 </li>
             </ul>
         </nav>

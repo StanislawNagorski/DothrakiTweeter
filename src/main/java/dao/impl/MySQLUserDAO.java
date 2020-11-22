@@ -57,7 +57,18 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
 
     @Override
     public HashSet<AppUser> getFollowedUsers(AppUser loggedUser) {
-        return new HashSet<>(loggedUser.getFollowing());
+        return loggedUser.getFollowing().stream()
+                .filter(AppUser::isActive)
+                .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    @Override
+    public HashSet<AppUser> getFollowedUsers(AppUser loggedUser, int offset, int limit) {
+        return loggedUser.getFollowing().stream()
+                .skip(offset)
+                .limit(limit)
+                .filter(AppUser::isActive)
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
     @Override
@@ -68,8 +79,6 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
         HashSet<AppUser> appUsers = new HashSet<AppUser>(query.getResultList());
         appUsers.removeAll(loggedUser.getFollowing());
         return appUsers;
-
-        //TODO do przepsania w hibarnate tak aby nie pobierać całej listy
     }
 
     @Override
