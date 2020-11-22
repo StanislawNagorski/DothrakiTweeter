@@ -27,11 +27,12 @@ and just to play with it a little :)
 Technology stack:
 -
 - Java 11,
-- Servlets and ,
+- Servlets,
 - JPA and MySQL,
 - build with Maven,
 - Dothraki API,
 - MD5 hash,
+- Gson,
 - HTML, Bootstrap 4.0
 
 What I have learned in this project:
