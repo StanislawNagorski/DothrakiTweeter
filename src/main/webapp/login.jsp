@@ -6,6 +6,8 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="google-signin-client_id" content="464947380957-4his5r75p6q5i9oj3u4vl7jusg5lq3a1.apps.googleusercontent.com">
+
     <style>
         body {
             background: #f5f5f5
@@ -57,7 +59,18 @@
             </div>
             <p class="text-center"><a href="register" class="btn">Sign up</a></p>
         </form>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
 </main>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+</script>
 </body>
 </html>
