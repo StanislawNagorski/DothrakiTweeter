@@ -54,7 +54,7 @@ public class UsersServlet extends HttpServlet {
             if (page <= 0){page = 0;}
             if (page > numberOfPagesForFollowing) {page = numberOfPagesForFollowing;}
             followedUsers = service.getFollowedUsers(user, (page* DEFAULT_USERS_LIMIT), DEFAULT_USERS_LIMIT);
-            req.setAttribute(FOLLOWERS_CURRENT_PAGE, page);
+            req.setAttribute(FOLLOWING_CURRENT_PAGE, page);
 
         } else {
             followedUsers = service.getFollowedUsers(user, DEFAULT_USERS_OFFSET, DEFAULT_USERS_LIMIT);
