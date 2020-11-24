@@ -4,11 +4,12 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class LoginBuilderForGoogle {
 
-    public static String build(String name, String email){
-        StringBuilder stringBuilder = new StringBuilder(name);
+    public static String build(String email){
+        StringBuilder stringBuilder = new StringBuilder();
         String hash = DigestUtils.md5Hex(email).substring(0,4);
-        System.out.println(hash);
-        stringBuilder.append("#");
+        int indexOf = email.indexOf('@');
+        stringBuilder.append(email.substring(0,indexOf));
+        stringBuilder.append("-");
         stringBuilder.append(hash);
         return stringBuilder.toString();
     }
