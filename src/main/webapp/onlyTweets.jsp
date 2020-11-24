@@ -29,8 +29,10 @@
     <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
     <c:forEach items="${tweets}" var="tweet">
         <div class="media text-muted pt-3">
-            <img src="<c:url value = "${tweet.author.avatar}"/>" alt="" class="mr-2 rounded" width="32"
-                 height="32">
+            <a href="profileEdit?login=${tweet.author.login}">
+                <img src="<c:url value = "${tweet.author.avatar}"/>" alt="" class="mr-2 rounded" width="32"
+                                                                                          height="32">
+            </a>
 
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <strong class="d-block text-gray-dark">
