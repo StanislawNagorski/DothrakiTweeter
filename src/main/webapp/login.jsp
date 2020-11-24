@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block blue"> Sign in</button>
+                <button type="submit" class="btn btn-dark btn-block"> Sign in</button>
             </div>
             <p class="text-center"><a href="register" class="btn">Sign up</a></p>
         </form>

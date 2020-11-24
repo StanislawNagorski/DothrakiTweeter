@@ -127,7 +127,7 @@
                                         </c:when>
 
                                         <c:otherwise>
-                                        <a class="btn btn-primary" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
+                                        <a class="btn btn-dark" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:if>
