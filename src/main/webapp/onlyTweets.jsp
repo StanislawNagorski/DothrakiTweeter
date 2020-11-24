@@ -29,12 +29,14 @@
     <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
     <c:forEach items="${tweets}" var="tweet">
         <div class="media text-muted pt-3">
-            <img src="<c:url value = "${tweet.author.avatar}"/>" alt="" class="mr-2 rounded" width="32"
-                 height="32">
+            <a href="profileEdit?login=${tweet.author.login}">
+                <img src="<c:url value = "${tweet.author.avatar}"/>" alt="" class="mr-2 rounded" width="32"
+                                                                                          height="32">
+            </a>
 
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <strong class="d-block text-gray-dark">
-                        <a href="profileEdit?login=${tweet.author.login}"> ${tweet.author.login} </a>
+                        <a class="text-dark" href="profileEdit?login=${tweet.author.login}"> ${tweet.author.login} </a>
                     <br>
                 </strong>
                 <strong class="d-block text-gray-dark"></strong>
@@ -48,7 +50,7 @@
                 <b>Published at : <fmt:formatDate value="${tweet.publishedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></b>
             </p>
             <c:if test="${tweet.author.login.equals(sessionScope.login)}">
-                <a href="deleteTweet?tweetId=${tweet.id}">Delete</a>
+                <a class="text-secondary" href="deleteTweet?tweetId=${tweet.id}">Delete</a>
             </c:if>
         </div>
     </c:forEach>

@@ -52,6 +52,7 @@ public class RegisterServlet extends HttpServlet {
                     .lastName(req.getParameter(ServletUtils.USER_SURNAME))
                     .password(hashedPassword)
                     .email(userEmail)
+                    .avatar(ServletUtils.DEFAULT_AVATAR)
                     .build();
 
             userService.register(appUser);

@@ -84,6 +84,13 @@
         .shadow-none {
             box-shadow: none !important;
         }
+
+        .avatar-frame{
+            padding-top: 5px;
+            width: 160px;
+            height: 264px;
+            background-image: url("resources/img/avatar_frame.png");
+        }
     </style>
 </head>
 <body>
@@ -105,7 +112,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
+                            <div class="avatar-frame">
                             <img src="<c:url value = "${user.avatar}"/>" alt="Admin" class="rounded-circle" width="150">
+                            </div>
                             <div class="mt-3">
                                 <h4> ${user.name} ${user.lastName} </h4>
                                 <p class="text-secondary mb-1">${user.login}</p>
@@ -118,7 +127,7 @@
                                         </c:when>
 
                                         <c:otherwise>
-                                        <a class="btn btn-primary" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
+                                        <a class="btn btn-dark" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:if>

@@ -34,7 +34,7 @@ o        .blue {
             <div class="form-group">
                 <textarea class="form-control rounded-0" name="tweetMessage" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary blue">Tweet</button>
+            <button type="submit" class="btn btn-dark">Tweet</button>
         </form>
     </div>
 

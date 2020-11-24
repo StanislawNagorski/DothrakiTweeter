@@ -13,8 +13,12 @@
             background: #f5f5f5
         }
 
-        .blue {
-            background-color: #00b5ec !important;
+        .simplebox {
+            outline: none;
+            border: none !important;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
@@ -55,7 +59,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block blue"> Sign in</button>
+                <button type="submit" class="btn btn-dark btn-block"> Sign in</button>
             </div>
             <p class="text-center"><a href="register" class="btn">Sign up</a></p>
         </form>

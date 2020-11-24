@@ -33,11 +33,12 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Top Users to follow</h6>
         <c:forEach items="${notFollowedUsers}" var="notFollowedUser">
             <div class="media text-muted pt-3">
+                <a class="text-dark" href="profileEdit?login=${notFollowedUser.login}">
                 <img src="<c:url value ="${notFollowedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
-                     height="32">
+                     height="32"> </a>
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
-                        <a href="profileEdit?login=${notFollowedUser.login}"> ${notFollowedUser.login} </a>
+                        <a class="text-dark" href="profileEdit?login=${notFollowedUser.login}"> ${notFollowedUser.login} </a>
                     </strong>
                     <strong class="d-block text-gray-dark">${notFollowedUser.name}</strong>
                     <strong class="d-block text-gray-dark">Followers: ${fn:length(notFollowedUser.followers)}</strong>
@@ -45,7 +46,7 @@
                     <strong class="d-block text-gray-dark">
                         On Twitter since :
                         <fmt:formatDate value="${notFollowedUser.registeredSince}" pattern="yyyy-MM-dd"/> </strong>
-                    <a href="follow?userLoginToFollow=${notFollowedUser.login}"><b>Follow</b></a>
+                    <a class="badge badge-dark" href="follow?userLoginToFollow=${notFollowedUser.login}"><b>Follow</b></a>
                 </p>
             </div>
         </c:forEach>
@@ -57,11 +58,12 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Users which You follow:</h6>
         <c:forEach items="${followedUsers}" var="followedUser">
             <div class="media text-muted pt-3">
+                <a href="profileEdit?login=${followedUser.login}">
                 <img src="<c:url value = "${followedUser.avatar}"/>" alt="" class="mr-2 rounded" width="32"
-                     height="32">
+                     height="32"> </a>
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
-                        <a href="profileEdit?login=${followedUser.login}"> ${followedUser.login} </a>
+                        <a class="text-dark" href="profileEdit?login=${followedUser.login}"> ${followedUser.login} </a>
                     </strong>
                     <strong class="d-block text-gray-dark">${followedUser.name}</strong>
                     <strong class="d-block text-gray-dark">Followers: ${fn:length(followedUser.followers)}</strong>
@@ -69,7 +71,7 @@
                     <strong class="d-block text-gray-dark">
                         On twitter since :
                         <fmt:formatDate value="${followedUser.registeredSince}" pattern="yyyy-MM-dd HH-mm"/> </strong>
-                    <a href="unfollow?userLoginToUnfollow=${followedUser.login}"><b>Unfollow</b></a>
+                    <a class="badge badge-secondary" href="unfollow?userLoginToUnfollow=${followedUser.login}"><b>Unfollow</b></a>
                 </p>
             </div>
         </c:forEach>
@@ -78,11 +80,6 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${followingCurrentPage - 1}#following">Previous</a></li>
-
-<%--                <c:forEach begin="0" end="${followingTotalPages}" var="i">--%>
-<%--                    <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${i}#following">${i+1}</a></li>--%>
-<%--                </c:forEach>--%>
-
                 <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${followingCurrentPage + 1}#following">Next</a></li>
             </ul>
         </nav>
@@ -93,11 +90,12 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Your followers:</h6>
         <c:forEach items="${followers}" var="follower">
             <div class="media text-muted pt-3">
-                <img src="<c:url value ="${follower.avatar}"/>" alt="" class="mr-2 rounded" width="32"
-                     height="32">
+                <a href="profileEdit?login=${follower.login}">
+                    <img src="<c:url value ="${follower.avatar}"/>" alt="" class="mr-2 rounded" width="32"
+                                                                                     height="32"> </a>
                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">
-                        <a href="profileEdit?login=${follower.login}"> ${follower.login} </a>
+                        <a class="text-dark" href="profileEdit?login=${follower.login}"> ${follower.login} </a>
                     </strong>
                     <strong class="d-block text-gray-dark">${follower.name}</strong>
                     <strong class="d-block text-gray-dark">Followers: ${fn:length(follower.followers)}</strong>
@@ -115,12 +113,6 @@
             <ul class="pagination justify-content-center">
 
                 <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage - 1}#followers">Previous</a></li>
-
-<%--                <c:forEach begin="0" end="${followersTotalPages}" var="i">--%>
-<%--                    <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${i}#followers">${i+1}</a></li>--%>
-<%--                </c:forEach>--%>
-
-
                 <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage + 1}#followers">Next</a>
                 </li>
             </ul>
