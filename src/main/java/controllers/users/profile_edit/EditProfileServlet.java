@@ -131,13 +131,17 @@ public class EditProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         AppUser user;
+        String loginFromSession = getUserLoginFromSession(req);
+        AppUser userFromSession = service.getUserByLogin(loginFromSession);
 
         if (req.getParameter(USER_LOGIN) != null){
             String userLoginFromParameter = req.getParameter(USER_LOGIN);
             user = service.getUserByLogin(userLoginFromParameter);
+
+            boolean isFollowing = userFromSession.getFollowing().contains(user);
+            req.setAttribute(IS_FOLLOWING, isFollowing);
         } else {
-            String userLoginFromSession = getUserLoginFromSession(req);
-            user = service.getUserByLogin(userLoginFromSession);
+            user = userFromSession;
         }
 
 

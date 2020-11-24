@@ -41,7 +41,7 @@ public class ServletUtils {
     public static final String FOLLOWERS_CURRENT_PAGE = "followersCurrentPage";
     public static final String FOLLOWING_NUMBER_OF_PAGES = "followingTotalPages";
     public static final String FOLLOWING_CURRENT_PAGE = "followingCurrentPage";
-
+    public static final String IS_FOLLOWING = "isFollowing";
 
 
     public static String getUserLoginFromSession(HttpServletRequest req) {
