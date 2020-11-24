@@ -114,7 +114,7 @@
                                 <c:if test="${!login.equals(user.login)}">
                                     <c:choose>
                                         <c:when test="${isFollowing}">
-                                        <a class="btn btn-primary" href="unfollow?userLoginToUnfollow=${user.login}" role="button">Unfollow</a>
+                                        <a class="btn btn-secondary" href="unfollow?userLoginToUnfollow=${user.login}" role="button">Unfollow</a>
                                         </c:when>
 
                                         <c:otherwise>
