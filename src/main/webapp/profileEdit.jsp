@@ -112,7 +112,15 @@
                                 <p class="text-secondary mb-1">Followers: ${fn:length(user.followers)}</p>
 
                                 <c:if test="${!login.equals(user.login)}">
-                                <a class="btn btn-primary" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
+                                    <c:choose>
+                                        <c:when test="${isFollowing}">
+                                        <a class="btn btn-primary" href="unfollow?userLoginToUnfollow=${user.login}" role="button">Unfollow</a>
+                                        </c:when>
+
+                                        <c:otherwise>
+                                        <a class="btn btn-primary" href="follow?userLoginToFollow=${user.login}" role="button">Follow</a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:if>
 
                                 <c:if test="${login.equals(user.login)}">
