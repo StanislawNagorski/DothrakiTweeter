@@ -39,7 +39,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input name="login" class="form-control" placeholder="Login" type="text" required>
+                    <input pattern="^[A-Za-z0-9_]+$" minlength="3" maxlength="12" name="login" class="form-control" placeholder="Login" type="text" required>
                 </div>
             </div>
             <div class="form-group">
@@ -63,7 +63,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input name="password" class="form-control" placeholder="*****" type="password" aria-required>
+                    <input minlength="6" maxlength="30" name="password" class="form-control" placeholder="*****" type="password" aria-required>
                 </div>
             </div>
             <div class="form-group">
@@ -71,7 +71,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input name="repeatedPassword" class="form-control" placeholder="*****" type="password" required>
+                    <input minlength="6" maxlength="30" name="repeatedPassword" class="form-control" placeholder="*****" type="password" required>
                 </div>
             </div>
             <div class="form-group">

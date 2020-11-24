@@ -176,9 +176,17 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                             </div>
-                                            <input name="${editField}" class="form-control" placeholder="Enter new ${editField}"
-                                                   type="${type}"
-                                                   required>
+                                                <c:choose>
+                                                    <c:when test="${editField.equals('login')}">
+                                                        <input pattern="^[A-Za-z0-9_]+$" minlength="3" maxlength="12" name="login" class="form-control" placeholder="Login" type="text" required>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <input name="${editField}" class="form-control" placeholder="Enter new ${editField}"
+                                                               type="${type}" required>
+                                                    </c:otherwise>
+                                                </c:choose>
+
                                         </div>
                                     </div>
 
@@ -188,7 +196,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="repeatedPassword" class="form-control" placeholder="Repeat password"
+                                                <input minlength="6" maxlength="30" name="repeatedPassword" class="form-control" placeholder="Repeat password"
                                                        type="password" required>
                                             </div>
                                         </div>

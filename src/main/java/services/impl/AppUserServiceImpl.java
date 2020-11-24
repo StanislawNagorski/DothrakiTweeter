@@ -1,12 +1,9 @@
 package services.impl;
 
 import dao.AppUserDAO;
-import dao.TweetDAO;
 import errors.ValidationError;
 import model.AppUser;
-import org.apache.commons.codec.digest.DigestUtils;
 import services.AppUserService;
-import utils.ServletUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,11 +28,19 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserDAO.getUserByEmail(email).isPresent();
     }
 
+    private boolean isLoginNotMatchingRequirements(String login){
+        return !login.matches(LOGIN_REGEX);
+    }
+
     @Override
     public Optional<ValidationError> validateLogin(String login) {
         if (isUserLoginNoneAvailable(login)){
             return Optional.of(new ValidationError(LOGIN_ERROR_HEADER, LOGIN_IN_USE_ERROR_MESSAGE));
         }
+        if (isLoginNotMatchingRequirements(login)){
+            return Optional.of(new ValidationError(LOGIN_ERROR_HEADER,LOGIN_NOT_MET_REQUIREMENTS));
+        }
+
         return Optional.empty();
     }
 
@@ -55,6 +60,9 @@ public class AppUserServiceImpl implements AppUserService {
         }
         if (isUserLoginNoneAvailable(login)) {
             errors.add(new ValidationError(LOGIN_ERROR_HEADER, LOGIN_IN_USE_ERROR_MESSAGE));
+        }
+        if (isLoginNotMatchingRequirements(login)){
+            errors.add(new ValidationError(LOGIN_ERROR_HEADER,LOGIN_NOT_MET_REQUIREMENTS));
         }
         return errors;
     }
