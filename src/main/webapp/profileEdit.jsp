@@ -199,7 +199,7 @@
                                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                             </div>
                                             <div class="custom-file">
-                                                <input name="avatar" accept="image/*" type="file" class="custom-file-input" id="inputGroupFile01">
+                                                <input name="avatar" accept="image/*" type="file" class="custom-file-input" id="inputGroupFile01" required>
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                             </div>
                                         </div>

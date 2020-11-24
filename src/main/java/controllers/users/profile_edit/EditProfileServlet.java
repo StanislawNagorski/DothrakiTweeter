@@ -27,8 +27,8 @@ import java.util.Optional;
 import static utils.ServletUtils.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5)
+        maxFileSize = 1024 * 1024,
+        maxRequestSize = 1024 * 1024)
 @WebServlet(name = "EditProfile", value = "/profileEdit")
 public class EditProfileServlet extends HttpServlet {
 
@@ -104,7 +104,7 @@ public class EditProfileServlet extends HttpServlet {
             String header = part.getHeader("content-disposition");
 
             if (header.contains(USER_AVATAR)) {
-                String fileName = writeFileToDir(uploadPath, part);
+                String fileName = writeFileToDir(uploadPath, part, user);
                 service.changeAvatar(user,fileName);
                 req.getSession().setAttribute(USER_AVATAR,fileName);
             }
@@ -112,11 +112,11 @@ public class EditProfileServlet extends HttpServlet {
         }
     }
 
-    private String writeFileToDir(String uploadPath, Part part) throws IOException {
+    private String writeFileToDir(String uploadPath, Part part, AppUser user) throws IOException {
         String uploadedFileName = getFileName(part);
-        String fileName = uploadPath + File.separator + uploadedFileName;
+        String fileName = uploadPath + File.separator + user.getLogin();
         part.write(fileName);
-        return UPLOAD_DIRECTORY + File.separator + uploadedFileName;
+        return UPLOAD_DIRECTORY + File.separator + user.getLogin();
     }
 
     private String getFileName(Part part) {
