@@ -36,6 +36,7 @@ public class ServletUtils {
     public static final String PROFILE_EDIT_TYPE = "type";
     public static final String TYPE_TEXT = "text";
     public static final String UPLOAD_DIRECTORY = "resources" + File.separator + "img";
+    public static final String DEFAULT_AVATAR = "resources/img/smallfolk.jpg";
     public static final String NON_AVATAR_FORM_CODE = "application/x-www-form-urlencoded";
     public static final String FOLLOWERS_NUMBER_OF_PAGES = "followersTotalPages";
     public static final String FOLLOWERS_CURRENT_PAGE = "followersCurrentPage";

@@ -24,7 +24,7 @@ public class AppUser {
     private Date registeredSince;
     @ManyToMany(mappedBy = "following", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Set<AppUser> followers = new HashSet<>();
-    private String avatar = "resources/img/smallfolk.jpg";
+    private String avatar;
 
     @OneToMany
     private Set<Tweet> tweets = new HashSet<>();
