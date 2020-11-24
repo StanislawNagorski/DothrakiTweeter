@@ -39,7 +39,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input pattern="^[A-Za-z0-9_]+$" minlength="3" maxlength="8" name="login" class="form-control" placeholder="Login" type="text" required>
+                    <input pattern="^[A-Za-z0-9_]+$" minlength="3" maxlength="12" name="login" class="form-control" placeholder="Login" type="text" required>
                 </div>
             </div>
             <div class="form-group">

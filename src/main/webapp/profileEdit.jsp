@@ -178,7 +178,7 @@
                                             </div>
                                                 <c:choose>
                                                     <c:when test="${editField.equals('login')}">
-                                                        <input pattern="^[A-Za-z0-9_]+$" minlength="3" maxlength="8" name="login" class="form-control" placeholder="Login" type="text" required>
+                                                        <input pattern="^[A-Za-z0-9_]+$" minlength="3" maxlength="12" name="login" class="form-control" placeholder="Login" type="text" required>
                                                     </c:when>
 
                                                     <c:otherwise>

@@ -76,6 +76,7 @@ public class EditProfileServlet extends HttpServlet {
             String newUserLogin = req.getParameter(USER_LOGIN);
 
             Optional<ValidationError> validationError = service.validateLogin(newUserLogin);
+
             if (validationError.isPresent()) {
                 req.setAttribute(ERRORS_ATTRIBUTE_NAME, validationError.get());
                 req.setAttribute(PROFILE_EDIT, USER_LOGIN);

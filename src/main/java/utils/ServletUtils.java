@@ -19,7 +19,7 @@ public class ServletUtils {
     public static final String PASSWORD_ERROR_HEADER = "INVALID PASSWORD";
     public static final String USER_INACTIVE_ERROR_HEADER = "This user account is not active";
     public static final String USER_INACTIVE_ERROR_MESSAGE = "Contact support to restore this account";
-    public static final String LOGIN_NOT_EXIST_MESSAGE = "Typed login do not exist";
+    public static final String LOGIN_NOT_MET_REQUIREMENTS = "Login must have min 3 characters, no special chars, it can have _";
     public static final String LOGIN_IN_USE_ERROR_MESSAGE = "Typed login is already in use";
     public static final String WRONG_PASSWORD_ERROR_MESSAGE = "Typed password do not match user";
     public static final String EMAIL_ERROR_MESSAGE = "Typed email is already in use";
@@ -43,6 +43,7 @@ public class ServletUtils {
     public static final String FOLLOWING_NUMBER_OF_PAGES = "followingTotalPages";
     public static final String FOLLOWING_CURRENT_PAGE = "followingCurrentPage";
     public static final String IS_FOLLOWING = "isFollowing";
+    public static final String LOGIN_REGEX = "^[A-Za-z0-9_]+$";
 
 
     public static String getUserLoginFromSession(HttpServletRequest req) {

@@ -43,12 +43,12 @@ public class GoogleLogin extends HttpServlet {
         String familyName = (String) payLoad.get("family_name");
         String email = payLoad.getEmail();
         String image = (String) payLoad.get("picture");
-
         String login = LoginBuilder.build(email);
+        System.out.println("LOGIN to: " + login);
 
         Optional<ValidationError> validationError = service.validateLogin(login);
-
         boolean userIsNotInDataBase = validationError.isEmpty();
+
         if (userIsNotInDataBase) {
             AppUser userFromGoogle = AppUser.UserBuilder.getBuilder()
                     .login(login)
