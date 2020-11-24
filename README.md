@@ -22,7 +22,8 @@ and just to play with it a little :)
 - profile page,
 - profile edit,
 - avatars integrations,
-- pagination of users, and TopToFollow.
+- pagination of users, and TopToFollow,
+- sign in with google
 
 Technology stack:
 -
@@ -34,6 +35,7 @@ Technology stack:
 - MD5 hash,
 - Gson,
 - HTML, Bootstrap 4.0
+- Google Authorization API
 
 What I have learned in this project:
 -
