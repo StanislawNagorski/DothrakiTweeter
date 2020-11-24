@@ -43,13 +43,12 @@ public class GoogleLogin extends HttpServlet {
             e.printStackTrace();
         }
 
-        String fullName = (String) payLoad.get("name");
         String name = (String) payLoad.get("given_name");
         String familyName = (String) payLoad.get("family_name");
         String email = payLoad.getEmail();
         String image = (String) payLoad.get("picture");
 
-        String login = LoginBuilderForGoogle.build(name, email);
+        String login = LoginBuilderForGoogle.build(email);
 
         Optional<ValidationError> validationError = service.validateLogin(login);
 
@@ -65,11 +64,6 @@ public class GoogleLogin extends HttpServlet {
             service.register(userFromGoogle);
         }
 
-//            List<ValidationError> errors = service.validateUser(login, email);
-//            if (!errors.isEmpty()){
-//                req.setAttribute(ServletUtils.ERRORS_ATTRIBUTE_NAME, errors);
-//                req.getRequestDispatcher("/login.jsp").forward(req, resp);
-//            }
 
         req.getSession().setAttribute(USER_LOGIN, login);
         req.getSession().setAttribute(USER_AVATAR, image);
