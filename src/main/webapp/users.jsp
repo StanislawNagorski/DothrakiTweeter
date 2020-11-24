@@ -78,11 +78,6 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${followingCurrentPage - 1}#following">Previous</a></li>
-
-<%--                <c:forEach begin="0" end="${followingTotalPages}" var="i">--%>
-<%--                    <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${i}#following">${i+1}</a></li>--%>
-<%--                </c:forEach>--%>
-
                 <li class="page-item"><a class="page-link" href="users?followingCurrentPage=${followingCurrentPage + 1}#following">Next</a></li>
             </ul>
         </nav>
@@ -115,12 +110,6 @@
             <ul class="pagination justify-content-center">
 
                 <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage - 1}#followers">Previous</a></li>
-
-<%--                <c:forEach begin="0" end="${followersTotalPages}" var="i">--%>
-<%--                    <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${i}#followers">${i+1}</a></li>--%>
-<%--                </c:forEach>--%>
-
-
                 <li class="page-item"><a class="page-link" href="users?followersCurrentPage=${followersCurrentPage + 1}#followers">Next</a>
                 </li>
             </ul>
