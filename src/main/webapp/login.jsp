@@ -13,8 +13,12 @@
             background: #f5f5f5
         }
 
-        .blue {
-            background-color: #00b5ec !important;
+        .simplebox {
+            outline: none;
+            border: none !important;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
