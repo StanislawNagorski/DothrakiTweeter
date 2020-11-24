@@ -2,7 +2,9 @@ package security;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class LoginBuilderForGoogle {
+public class LoginBuilder {
+
+    public static final String LOGIN_REGEX = "^[A-Za-z0-9_]+$";
 
     public static String build(String email){
         StringBuilder stringBuilder = new StringBuilder();

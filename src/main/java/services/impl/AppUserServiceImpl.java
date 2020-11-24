@@ -5,6 +5,7 @@ import dao.TweetDAO;
 import errors.ValidationError;
 import model.AppUser;
 import org.apache.commons.codec.digest.DigestUtils;
+import security.LoginBuilder;
 import services.AppUserService;
 import utils.ServletUtils;
 
@@ -31,11 +32,18 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserDAO.getUserByEmail(email).isPresent();
     }
 
+    private boolean isLoginMatchingRequirements(String login){
+        return login.matches(LoginBuilder.LOGIN_REGEX);
+    }
+
     @Override
     public Optional<ValidationError> validateLogin(String login) {
         if (isUserLoginNoneAvailable(login)){
             return Optional.of(new ValidationError(LOGIN_ERROR_HEADER, LOGIN_IN_USE_ERROR_MESSAGE));
         }
+
+
+
         return Optional.empty();
     }
 

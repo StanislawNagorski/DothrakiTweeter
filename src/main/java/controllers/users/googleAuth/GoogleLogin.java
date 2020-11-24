@@ -4,20 +4,16 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import dao.impl.MySQLUserDAO;
 import errors.ValidationError;
 import model.AppUser;
-import security.LoginBuilderForGoogle;
-import security.PasswordHasher;
+import security.LoginBuilder;
 import services.AppUserService;
 import services.impl.AppUserServiceImpl;
-import utils.ServletUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import static utils.ServletUtils.*;
@@ -48,7 +44,7 @@ public class GoogleLogin extends HttpServlet {
         String email = payLoad.getEmail();
         String image = (String) payLoad.get("picture");
 
-        String login = LoginBuilderForGoogle.build(email);
+        String login = LoginBuilder.build(email);
 
         Optional<ValidationError> validationError = service.validateLogin(login);
 
