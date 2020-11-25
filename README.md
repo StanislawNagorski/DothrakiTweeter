@@ -3,6 +3,7 @@ Class time => [![time tracker](https://wakatime.com/badge/github/StanislawNagors
 
 My addons => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter.svg)](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter)
 
+![image](https://user-images.githubusercontent.com/60883168/100235289-80266b00-2f2c-11eb-906c-7aa954b33778.png)
 
 Twitter to learn Dothraki:
 -

@@ -16,6 +16,7 @@ public interface AppUserService {
     void register(AppUser user);
     void deactivate(AppUser user);
     AppUser getUserByLogin(String login);
+    Optional<AppUser> getUserByExternalLogin(String login);
     HashSet<AppUser> getFollowers(AppUser loggedUser);
     HashSet<AppUser> getFollowers(AppUser loggedUser, int offset, int limit);
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser);

@@ -114,6 +114,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public Optional<AppUser> getUserByExternalLogin(String externalLogin) {
+        return appUserDAO.getUserByExternalLogin(externalLogin);
+    }
+
+    @Override
     public HashSet<AppUser> getFollowers(AppUser loggedUser) {
         return appUserDAO.getFollowers(loggedUser);
     }

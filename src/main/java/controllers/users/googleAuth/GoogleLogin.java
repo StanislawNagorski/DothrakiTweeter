@@ -43,24 +43,24 @@ public class GoogleLogin extends HttpServlet {
         String familyName = (String) payLoad.get("family_name");
         String email = payLoad.getEmail();
         String image = (String) payLoad.get("picture");
-        String login = LoginBuilder.build(email);
-        System.out.println("LOGIN to: " + login);
+        String externalLogin = LoginBuilder.build(email);
 
-        Optional<ValidationError> validationError = service.validateLogin(login);
-        boolean userIsNotInDataBase = validationError.isEmpty();
+        Optional<AppUser> userByExternalLogin = service.getUserByExternalLogin(externalLogin);
+        boolean userIsNotInDataBase = userByExternalLogin.isEmpty();
 
         if (userIsNotInDataBase) {
             AppUser userFromGoogle = AppUser.UserBuilder.getBuilder()
-                    .login(login)
+                    .login(externalLogin)
                     .name(name)
                     .lastName(familyName)
                     .email(email)
                     .avatar(image)
+                    .externalLogin(externalLogin)
                     .build();
             service.register(userFromGoogle);
         }
 
-
+        String login = service.getUserByExternalLogin(externalLogin).get().getLogin();
         req.getSession().setAttribute(USER_LOGIN, login);
         req.getSession().setAttribute(USER_AVATAR, image);
         req.getRequestDispatcher("users").forward(req, resp);

@@ -10,6 +10,7 @@ public interface AppUserDAO {
     HashSet<AppUser> getAll();
     Optional<AppUser> getUserById(Long id);
     Optional<AppUser> getUserByEmail(String email);
+    Optional<AppUser> getUserByExternalLogin(String externalLogin);
     Optional<AppUser> getUserByLogin(String login);
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser);
     HashSet<AppUser> getFollowedUsers(AppUser loggedUser, int offset, int limit);

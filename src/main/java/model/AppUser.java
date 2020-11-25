@@ -25,6 +25,7 @@ public class AppUser {
     @ManyToMany(mappedBy = "following", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Set<AppUser> followers = new HashSet<>();
     private String avatar;
+    private String externalLogin;
 
     @OneToMany
     private Set<Tweet> tweets = new HashSet<>();
@@ -36,6 +37,14 @@ public class AppUser {
     private Set<AppUser> following = new HashSet<>();
 
     public AppUser() {
+    }
+
+    public String getExternalLogin() {
+        return externalLogin;
+    }
+
+    public void setExternalLogin(String externalLogin) {
+        this.externalLogin = externalLogin;
     }
 
     private boolean isActive;
@@ -168,6 +177,7 @@ public class AppUser {
         private String password;
         private String email;
         private String avatar;
+        private String externalLogin;
 
         public static UserBuilder getBuilder() {
             return new UserBuilder();
@@ -203,6 +213,11 @@ public class AppUser {
             return this;
         }
 
+        public UserBuilder externalLogin(String externalLogin){
+            this.externalLogin = externalLogin;
+            return this;
+        }
+
         public AppUser build() {
             AppUser user = new AppUser();
             user.setLogin(this.login);
@@ -211,6 +226,7 @@ public class AppUser {
             user.setLastName(this.lastName);
             user.setEmail(this.email);
             user.setAvatar(this.avatar);
+            user.setExternalLogin(this.externalLogin);
             user.setActive(true);
             return user;
         }

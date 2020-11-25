@@ -56,6 +56,17 @@ public class MySQLUserDAO extends AbstractMySQLDAO implements AppUserDAO {
     }
 
     @Override
+    public Optional<AppUser> getUserByExternalLogin(String externalLogin) {
+       TypedQuery<AppUser> query = em.createQuery("select u from AppUser u where u.externalLogin=:externalLogin", AppUser.class);
+       query.setParameter("externalLogin", externalLogin);
+        try {
+            return Optional.ofNullable(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public HashSet<AppUser> getFollowedUsers(AppUser loggedUser) {
         return loggedUser.getFollowing().stream()
                 .filter(AppUser::isActive)
