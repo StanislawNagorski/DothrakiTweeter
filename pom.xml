@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>TwitterForDummies Maven Webapp</name>
+    <name>DothrakiTwitter Maven Webapp</name>
 
 
     <properties>

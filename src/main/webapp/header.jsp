@@ -15,12 +15,12 @@
             background: #f5f5f5
         }
 
-        .text-white-50 {
-            color: rgba(255, 255, 255, .5);
+        .custom-text {
+            color: #d2974f;
         }
 
         .bg-blue {
-            background-color: #00b5ec;
+            background-color: black;
         }
 
         .box-shadow {
@@ -39,25 +39,25 @@
         <img class="mr-3" src="<c:url value = "${avatar}"/>" alt="" width="48" height="48">
     </a>
     <div class="lh-100">
-        <h6 class="mb-0 text-white lh-100">
-            <a class="text-white" href="profileEdit">
+        <h6 class="mb-0 lh-100">
+            <a class="custom-text" href="profileEdit">
                 ${fn:toUpperCase(login)}
             </a>
         </h6>
     </div>
     <div class="lh-100">
         <h6 class="mb-0 lh-100 tab">
-            <a class="text-white" href="messages">Messages</a>
+            <a class="custom-text" href="messages">Messages</a>
         </h6>
     </div>
     <div class="lh-100">
         <h6 class="mb-0 lh-100 tab">
-            <a class="text-white" href="users">Users</a>
+            <a class="custom-text" href="users">Users</a>
         </h6>
     </div>
     <div class="lh-100 ml-auto">
         <h6 class="mb-0 lh-100">
-            <a class="text-white" onclick="signOut();" href="logout">Log out</a>
+            <a class="custom-text" onclick="signOut();" href="logout">Log out</a>
         </h6>
     </div>
 </div>
