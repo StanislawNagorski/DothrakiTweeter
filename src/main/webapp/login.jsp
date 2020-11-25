@@ -24,6 +24,17 @@
 </head>
 <body>
 <main role="main" class="container">
+
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, Westeros!</h1>
+        <p class="lead">Let`s learn Dothraki together!</p>
+        <hr class="my-4">
+        <p>We all know that unless horses get wings Dothraki Hordes will NEVER swim across Narrow See. But if during your travels You will find yourself in contact with dothraki horde it is better to be good with sword and speak their language. This app is to help you with language learning! (but if you need to improve your swordsmanship contact me! :)</p>
+        <p class="lead">
+            <a class="btn btn-dark btn-lg" href="https://www.linkedin.com/in/stanislawnagorski/" role="button">Contact</a>
+        </p>
+    </div>
+
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <h4 class="text-center mb-4 mt-1">Sign in</h4>
         <hr>
