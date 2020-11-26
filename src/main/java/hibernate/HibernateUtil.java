@@ -10,6 +10,7 @@ public class HibernateUtil {
     private final EntityManagerFactory factory = Persistence.createEntityManagerFactory("myDatabase");
     private final EntityManager em = factory.createEntityManager();
 
+
     private HibernateUtil(){ }
 
     public static HibernateUtil getInstance() {
