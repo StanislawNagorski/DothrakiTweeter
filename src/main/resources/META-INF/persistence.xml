@@ -14,7 +14,8 @@
             <property name="javax.persistence.jdbc.password" value="kc1uDiEDeCEW2Ao1HFjh"/>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:mysql://stah-portfolio.mysql.database.azure.com:3306/dothrakitwitter?useSSL=true&amp;requireSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw&amp;allowPublicKeyRetrieval=true"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>-->
             <property name="hibernate.jdbc.time_zone" value="Europe/Warsaw"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
 <!--            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
