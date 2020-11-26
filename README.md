@@ -30,7 +30,7 @@ Technology stack:
 -
 - Java 11,
 - Servlets,
-- JPA and MySQL,
+- JPA, hibernate and MySQL,
 - build with Maven,
 - Dothraki API,
 - MD5 hash,
