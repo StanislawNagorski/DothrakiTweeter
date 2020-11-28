@@ -32,7 +32,7 @@ o        .blue {
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <form action="addMessage" method="POST">
             <div class="form-group">
-                <textarea class="form-control rounded-0" name="tweetMessage" rows="3"></textarea>
+                <textarea class="form-control rounded-0" name="tweetMessage" rows="3" maxlength="300"></textarea>
             </div>
             <button type="submit" class="btn btn-dark">Tweet</button>
         </form>

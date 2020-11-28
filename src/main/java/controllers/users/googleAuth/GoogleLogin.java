@@ -30,6 +30,7 @@ public class GoogleLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        System.out.println("do post w google login");
 
         String idToken = req.getParameter("id_token");
         GoogleIdToken.Payload payLoad = null;
@@ -44,9 +45,11 @@ public class GoogleLogin extends HttpServlet {
         String email = payLoad.getEmail();
         String image = (String) payLoad.get("picture");
         String externalLogin = LoginBuilder.build(email);
+        System.out.println("extrenal login to: " + externalLogin);
 
         Optional<AppUser> userByExternalLogin = service.getUserByExternalLogin(externalLogin);
         boolean userIsNotInDataBase = userByExternalLogin.isEmpty();
+        System.out.println("czy nie istnieje w bazie? " +  userIsNotInDataBase);
 
         if (userIsNotInDataBase) {
             AppUser userFromGoogle = AppUser.UserBuilder.getBuilder()
