@@ -113,7 +113,8 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <div class="avatar-frame">
-                            <img src="<c:url value = "${user.avatar}"/>" alt="Admin" class="rounded-circle" width="150">
+                                <c:set var="contentType" value="application/xml;charset=UTF-8"/>
+                            <img src="<c:url value = "${user.avatar}" />" alt="Admin" class="rounded-circle" width="150">
                             </div>
                             <div class="mt-3">
                                 <h4> ${user.name} ${user.lastName} </h4>

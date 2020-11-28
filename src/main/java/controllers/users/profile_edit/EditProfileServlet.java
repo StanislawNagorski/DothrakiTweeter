@@ -115,9 +115,11 @@ public class EditProfileServlet extends HttpServlet {
 
     private String writeFileToDir(String uploadPath, Part part, AppUser user) throws IOException {
         String uploadedFileName = getFileName(part);
-        String fileName = uploadPath + File.separator + user.getLogin();
+        int indexOfDot = uploadedFileName.indexOf('.');
+        String fileExtenction = uploadedFileName.substring(indexOfDot);
+        String fileName = uploadPath + File.separator + user.getLogin() + fileExtenction;
         part.write(fileName);
-        return UPLOAD_DIRECTORY + File.separator + user.getLogin();
+        return UPLOAD_DIRECTORY + File.separator + user.getLogin() + fileExtenction;
     }
 
     private String getFileName(Part part) {
