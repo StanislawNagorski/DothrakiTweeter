@@ -6,6 +6,7 @@ Time I spend on project turing class => [![time tracker](https://wakatime.com/ba
 Time I spend with my addons => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter.svg)](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter)
 
 Page is now live, and You can check it out: https://learndothraki.azurewebsites.net/DothrakiTwitter/
+Try Login Demo, Pass: demodemo
 
 ![Build and deploy WAR app to Azure Web App - learndothraki](https://github.com/StanislawNagorski/DothrakiTweeter/workflows/Build%20and%20deploy%20WAR%20app%20to%20Azure%20Web%20App%20-%20learndothraki/badge.svg)
 
