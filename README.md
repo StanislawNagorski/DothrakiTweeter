@@ -1,9 +1,15 @@
+Some stats:
+-
 
-Class time => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki.svg)](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki)
+Time I spend on project turing class => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki.svg)](https://wakatime.com/badge/github/StanislawNagorski/TwitterForDothraki)
 
-My addons => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter.svg)](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter)
+Time I spend with my addons => [![time tracker](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter.svg)](https://wakatime.com/badge/github/StanislawNagorski/DothrakiTweeter)
 
-![image](https://user-images.githubusercontent.com/60883168/100235289-80266b00-2f2c-11eb-906c-7aa954b33778.png)
+Page is now live, and You can check it out: https://learndothraki.azurewebsites.net/DothrakiTwitter/
+
+![Build and deploy WAR app to Azure Web App - learndothraki](https://github.com/StanislawNagorski/DothrakiTweeter/workflows/Build%20and%20deploy%20WAR%20app%20to%20Azure%20Web%20App%20-%20learndothraki/badge.svg)
+
+![image](https://user-images.githubusercontent.com/60883168/101258837-6e5f7780-3725-11eb-9451-bd53f02282c9.png)
 
 Twitter to learn Dothraki:
 -
