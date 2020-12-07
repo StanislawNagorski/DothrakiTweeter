@@ -43,8 +43,9 @@ Technology stack:
 - Dothraki API,
 - MD5 hash,
 - Gson,
-- HTML, Bootstrap 4.0
-- Google Authorization API
+- HTML, Bootstrap 4.0,
+- Google Authorization API,
+- C3-P0,
 
 What I have learned in this project:
 -
